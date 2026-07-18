@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="officejob"
+run/main_scene="uid://ndce6a2nllgd"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*uid://ct4h7e5bogv7f"
 
 [display]
 

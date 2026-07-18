@@ -1,18 +1,22 @@
 [gd_scene format=3 uid="uid://ndce6a2nllgd"]
 
-[ext_resource type="PackedScene" uid="uid://bgsiv0ntn5jw1" path="res://scenes/applications/textedit.tscn" id="1_nip3t"]
+[ext_resource type="Script" uid="uid://bjygoi35xrdxs" path="res://scenes/computer/pc.gd" id="1_vj4ls"]
 [ext_resource type="Texture2D" uid="uid://bkgqgabnxmfcm" path="res://resources/textures/backgrounds/chickstock.jpg" id="1_xy2n0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy2n0"]
 bg_color = Color(1.6123802e-05, 0.56230533, 0.110116534, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" unique_id=956624689]
+[node name="VBoxContainer" type="VBoxContainer" unique_id=956624689 node_paths=PackedStringArray("windowroot", "windowselectorroot")]
+texture_filter = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
+script = ExtResource("1_vj4ls")
+windowroot = NodePath("SubViewportContainer/windowroot")
+windowselectorroot = NodePath("PanelContainer/HBoxContainer/MarginContainer/windowselectorroot")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=685736614]
 texture_filter = 1
@@ -20,7 +24,7 @@ layout_mode = 2
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1829634298]
+[node name="windowroot" type="SubViewport" parent="SubViewportContainer" unique_id=1829634298]
 handle_input_locally = false
 anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
@@ -29,7 +33,7 @@ oversampling = false
 size = Vector2i(640, 450)
 render_target_update_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=862976209]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/windowroot" unique_id=862976209]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,49 +42,23 @@ grow_vertical = 2
 texture = ExtResource("1_xy2n0")
 expand_mode = 2
 
-[node name="Window" type="Window" parent="SubViewportContainer/SubViewport" unique_id=1969246578]
-scaling_3d_mode = 5
-anisotropic_filtering_level = 0
-canvas_item_default_texture_filter = 0
-oversampling = false
-oversampling_override = 1.0
-title = "Untitled Document"
-position = Vector2i(0, 36)
-size = Vector2i(380, 200)
-content_scale_mode = 1
-theme_override_constants/resize_margin = 8
-
-[node name="PanelContainer" parent="SubViewportContainer/SubViewport/Window" unique_id=52784208 instance=ExtResource("1_nip3t")]
-
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1230462089]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_xy2n0")
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=960922582]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer" unique_id=651285400]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer2" unique_id=2021549789]
-layout_mode = 2
-text = "untitled document"
-
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer2" unique_id=2065514969]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "settings"
-
-[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer2" unique_id=1343938463]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-text = "browser"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1579154618]
 layout_mode = 2
 alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer" unique_id=960922582]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+
+[node name="windowselectorroot" type="HBoxContainer" parent="PanelContainer/HBoxContainer/MarginContainer" unique_id=651285400]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HBoxContainer" unique_id=1870840239]
 layout_mode = 2

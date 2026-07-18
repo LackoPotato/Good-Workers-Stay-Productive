@@ -2,11 +2,19 @@
 
 [ext_resource type="StyleBox" uid="uid://0jaqqlvk0da" path="res://scenes/window/backgroundpanel.tres" id="1_vvpal"]
 [ext_resource type="Script" uid="uid://dlmnl6x4oq4bh" path="res://scenes/applications/textedit.gd" id="2_j4mio"]
+[ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://scenes/window/toolbar.tres" id="3_io13l"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwvla"]
-bg_color = Color(0.68514574, 0.6851458, 0.6851455, 1)
+[node name="PCWindow" type="Window" unique_id=478694275 node_paths=PackedStringArray("document", "editor")]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(350, 200)
+theme_override_constants/resize_margin = 8
+script = ExtResource("2_j4mio")
+document = NodePath("PanelContainer/VBoxContainer/document")
+editor = NodePath("PanelContainer/editor")
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
 
-[node name="PanelContainer" type="PanelContainer" unique_id=52784208 node_paths=PackedStringArray("document", "editor")]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=52784208]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,28 +22,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_vvpal")
-script = ExtResource("2_j4mio")
-document = NodePath("VBoxContainer/document")
-editor = NodePath("editor")
 
-[node name="editor" type="LineEdit" parent="." unique_id=825573642]
+[node name="editor" type="LineEdit" parent="PanelContainer" unique_id=825573642]
 custom_maximum_size = Vector2(0, 0)
 layout_mode = 2
 context_menu_enabled = false
 emoji_menu_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=693638256]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=693638256]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1872128354]
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1872128354]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_bwvla")
+theme_override_styles/panel = ExtResource("3_io13l")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2" unique_id=244763554]
-z_index = 1
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1335412503]
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/PanelContainer2" unique_id=1335412503]
 texture_filter = 1
 clip_contents = false
 layout_mode = 2
@@ -55,9 +56,8 @@ text = "[table=9][cell][u]F[/u]ile [/cell][cell][u]E[/u]dit [/cell]
 [cell][u]W[/u]indow [/cell]
 [cell][u]H[/u]elp [/cell][table]"
 fit_content = true
-autowrap_mode = 2
 
-[node name="document" type="RichTextLabel" parent="VBoxContainer" unique_id=802837176]
+[node name="document" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=802837176]
 texture_filter = 1
 layout_mode = 2
 offset_transform_enabled = true
@@ -71,4 +71,4 @@ text = "just"
 fit_content = true
 scroll_active = false
 
-[connection signal="text_changed" from="editor" to="." method="_on_editor_text_changed"]
+[connection signal="text_changed" from="PanelContainer/editor" to="PanelContainer" method="_on_editor_text_changed"]
