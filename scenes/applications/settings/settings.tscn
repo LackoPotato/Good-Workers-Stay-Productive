@@ -1,6 +1,17 @@
 [gd_scene format=3 uid="uid://bl6ivyb06pm4f"]
 
 [ext_resource type="Script" uid="uid://bjy6g4i7brdhj" path="res://scenes/applications/settings/settings.gd" id="1_h6n3k"]
+[ext_resource type="PackedScene" uid="uid://dttcks2f8mhgk" path="res://scenes/applications/settings/background_chooser.tscn" id="2_b6xre"]
+[ext_resource type="Texture2D" uid="uid://cboiiedr5l8ke" path="res://resources/textures/backgrounds/flowers.JPG" id="2_m6283"]
+[ext_resource type="Texture2D" uid="uid://brcdacke2jlwr" path="res://resources/textures/backgrounds/city.JPG" id="3_b1iu3"]
+[ext_resource type="Texture2D" uid="uid://c5e37u4qvogg3" path="res://resources/textures/backgrounds/horse.JPG" id="4_4mpun"]
+[ext_resource type="Texture2D" uid="uid://qvbxllyp5fvm" path="res://resources/textures/backgrounds/orangesky.JPG" id="5_3uu54"]
+[ext_resource type="Texture2D" uid="uid://pdxpntxeskgc" path="res://resources/textures/backgrounds/valley.JPG" id="6_b1iu3"]
+[ext_resource type="Texture2D" uid="uid://buwttm75wuqh0" path="res://resources/textures/backgrounds/blue.tres" id="7_3uu54"]
+[ext_resource type="Texture2D" uid="uid://v2anvm0wd31v" path="res://resources/textures/backgrounds/purple.tres" id="7_5gyq6"]
+[ext_resource type="Texture2D" uid="uid://0s164b5xvpxh" path="res://resources/textures/backgrounds/green.tres" id="8_5gyq6"]
+[ext_resource type="Texture2D" uid="uid://dy84odwei4hfn" path="res://resources/textures/backgrounds/pink.tres" id="8_6ksix"]
+[ext_resource type="Texture2D" uid="uid://df3q11tfcsx7i" path="res://resources/textures/backgrounds/white.tres" id="8_irmci"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18j1j"]
 bg_color = Color(0.5763628, 0.5599104, 0.85608125, 1)
@@ -25,16 +36,184 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_18j1j")
 layout_mode = 2
 current_tab = 0
 
-[node name="Sound" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=18853952]
+[node name="Desktop" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1113330151]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 metadata/_tab_index = 0
 
-[node name="Desktop" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1113330151]
-visible = false
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop" unique_id=1307927211]
 layout_mode = 2
-metadata/_tab_index = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3" unique_id=226463312]
+layout_mode = 2
+
+[node name="sound" type="HBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2" unique_id=2108401465]
+layout_mode = 2
+
+[node name="Labels" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound" unique_id=1342330476]
+layout_mode = 2
+
+[node name="Master" type="Label" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Labels" unique_id=1564268111]
+layout_mode = 2
+text = "Master"
+
+[node name="Music" type="Label" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Labels" unique_id=256492152]
+layout_mode = 2
+text = "Music"
+
+[node name="Sound" type="Label" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Labels" unique_id=592513270]
+layout_mode = 2
+text = "Sound"
+
+[node name="Sliders" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound" unique_id=1501293044]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Master" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=1992915728]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="Music" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=1135103041]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="Sound" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=2014053341]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="background" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2" unique_id=138825861]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background" unique_id=441254852]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer" unique_id=2132725891]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer" unique_id=1015636129]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=336493061]
+layout_mode = 2
+text = "Background"
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer" unique_id=544734631]
+layout_mode = 2
+columns = 5
+
+[node name="city" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=187499263 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("3_b1iu3")
+texture_pressed = ExtResource("3_b1iu3")
+texture_hover = ExtResource("3_b1iu3")
+texture_disabled = ExtResource("3_b1iu3")
+texture_focused = ExtResource("3_b1iu3")
+texture = ExtResource("3_b1iu3")
+
+[node name="flowers" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=1612933346 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("2_m6283")
+texture_pressed = ExtResource("2_m6283")
+texture_hover = ExtResource("2_m6283")
+texture_disabled = ExtResource("2_m6283")
+texture_focused = ExtResource("2_m6283")
+texture = ExtResource("2_m6283")
+
+[node name="horse" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=58721115 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("4_4mpun")
+texture_pressed = ExtResource("4_4mpun")
+texture_hover = ExtResource("4_4mpun")
+texture_disabled = ExtResource("4_4mpun")
+texture_focused = ExtResource("4_4mpun")
+texture = ExtResource("4_4mpun")
+
+[node name="orangesky" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=279496870 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("5_3uu54")
+texture_pressed = ExtResource("5_3uu54")
+texture_hover = ExtResource("5_3uu54")
+texture_disabled = ExtResource("5_3uu54")
+texture_focused = ExtResource("5_3uu54")
+texture = ExtResource("5_3uu54")
+
+[node name="valley" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=1013951112 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("6_b1iu3")
+texture_pressed = ExtResource("6_b1iu3")
+texture_hover = ExtResource("6_b1iu3")
+texture_disabled = ExtResource("6_b1iu3")
+texture_focused = ExtResource("6_b1iu3")
+texture = ExtResource("6_b1iu3")
+
+[node name="purple" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=1202953034 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("7_5gyq6")
+texture_pressed = ExtResource("7_5gyq6")
+texture_hover = ExtResource("7_5gyq6")
+texture_disabled = ExtResource("7_5gyq6")
+texture_focused = ExtResource("7_5gyq6")
+texture = ExtResource("7_5gyq6")
+
+[node name="green" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=2025499479 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("8_5gyq6")
+texture_pressed = ExtResource("8_5gyq6")
+texture_hover = ExtResource("8_5gyq6")
+texture_disabled = ExtResource("8_5gyq6")
+texture_focused = ExtResource("8_5gyq6")
+texture = ExtResource("8_5gyq6")
+
+[node name="blue" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=1636612418 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("7_3uu54")
+texture_pressed = ExtResource("7_3uu54")
+texture_hover = ExtResource("7_3uu54")
+texture_disabled = ExtResource("7_3uu54")
+texture_focused = ExtResource("7_3uu54")
+texture = ExtResource("7_3uu54")
+
+[node name="pink" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=1280516561 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture_normal = ExtResource("8_6ksix")
+texture_pressed = ExtResource("8_6ksix")
+texture_hover = ExtResource("8_6ksix")
+texture_disabled = ExtResource("8_6ksix")
+texture_focused = ExtResource("8_6ksix")
+texture = ExtResource("8_6ksix")
+
+[node name="white" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer" unique_id=1129405538 instance=ExtResource("2_b6xre")]
+layout_mode = 2
+texture = ExtResource("8_irmci")
 
 [node name="Game" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1736872341]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 1
+
+[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Sound" to="." method="_on_sound_value_changed"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/city" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/flowers" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/horse" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/orangesky" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/valley" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/purple" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/green" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/blue" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/pink" to="." method="set_background"]
+[connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/white" to="." method="set_background"]

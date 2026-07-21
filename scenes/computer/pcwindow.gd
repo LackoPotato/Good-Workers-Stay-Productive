@@ -35,7 +35,7 @@ func _init() -> void:
 	call_deferred("launch_on_ready")
 
 @export var corner_snap_range:Vector2i = Vector2i(40,40)
-@export var taskmanager_size:Vector2i = Vector2i(640,40) # The bar at the bottom, it's what KDE calls it at least (I think...), used to account for sizing differences
+@export var taskmanager_size:int = 40 # The bar at the bottom, it's what KDE calls it at least (I think...), used to account for sizing differences
 func get_corner() -> POSITION:
 	var screen_size := get_tree().root.content_scale_size
 	var mouse_position:Vector2i = position+Vector2i(get_mouse_position())
@@ -43,9 +43,9 @@ func get_corner() -> POSITION:
 		return POSITION.TOPLEFT
 	elif Rect2i(Vector2i(screen_size.x-corner_snap_range.x,0),corner_snap_range).has_point(mouse_position):
 		return POSITION.TOPRIGHT
-	elif Rect2i(Vector2i(0,screen_size.y-corner_snap_range.y)-Vector2i(0,taskmanager_size.y),corner_snap_range).has_point(mouse_position):
+	elif Rect2i(Vector2i(0,screen_size.y-corner_snap_range.y)-Vector2i(0,taskmanager_size),corner_snap_range).has_point(mouse_position):
 		return POSITION.BOTTOMLEFT
-	elif Rect2i(screen_size-corner_snap_range-Vector2i(0,taskmanager_size.y),corner_snap_range).has_point(mouse_position):
+	elif Rect2i(screen_size-corner_snap_range-Vector2i(0,taskmanager_size),corner_snap_range).has_point(mouse_position):
 		return POSITION.BOTTOMRIGHT
 	return POSITION.NONE
 
@@ -57,8 +57,8 @@ func _notification(what: int) -> void:
 		var screen_size := get_tree().root.content_scale_size
 		if position.y < window_title_size:
 			position.y = window_title_size
-		elif position.y > screen_size.y-taskmanager_size.y:
-			position.y = screen_size.y-taskmanager_size.y
+		elif position.y > screen_size.y-taskmanager_size:
+			position.y = screen_size.y-taskmanager_size
 		if position.x < 0:
 			position.x = 0
 		elif position.x > screen_size.x:
@@ -67,7 +67,7 @@ func _notification(what: int) -> void:
 
 
 func snap_to_corner() -> void:
-	var screen_size := get_tree().root.content_scale_size-Vector2i(0,taskmanager_size.y)
+	var screen_size := get_tree().root.content_scale_size-Vector2i(0,taskmanager_size)
 	@warning_ignore("integer_division")
 	var new_size := (screen_size/2) - Vector2i(window_side_size,window_title_size)
 	match snap_to:

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://qvbxllyp5fvm" path="res://resources/textures/backgrounds/orangesky.JPG" id="2_xy2n0"]
 [ext_resource type="PackedScene" uid="uid://bnogyqw84l4fq" path="res://scenes/applications/notscape/notscape.tscn" id="3_udd7d"]
 [ext_resource type="PackedScene" uid="uid://jv3yvdoocdae" path="res://scenes/computer/shutdown.tscn" id="4_cvdxb"]
+[ext_resource type="PackedScene" uid="uid://bl6ivyb06pm4f" path="res://scenes/applications/settings/settings.tscn" id="4_mnc83"]
 [ext_resource type="Texture2D" uid="uid://c82lahflywtd5" path="res://resources/textures/desktop/power.png" id="5_04i1l"]
 [ext_resource type="PackedScene" uid="uid://clud3jgqj0pg1" path="res://scenes/computer/shutdownprompt.tscn" id="5_mfavi"]
 [ext_resource type="Texture2D" uid="uid://d0nnvt67h10j3" path="res://resources/textures/desktop/apps.png" id="6_l37ko"]
@@ -54,7 +55,8 @@ windowroot = NodePath("pc/SubViewportContainer/windowroot")
 windowselectorroot = NodePath("pc/taskmanager/HBoxContainer/MarginContainer/ScrollContainer/windowselectorroot")
 window_scenes = Dictionary[int, PackedScene]({
 0: ExtResource("2_vj4ls"),
-1: ExtResource("3_udd7d")
+1: ExtResource("3_udd7d"),
+2: ExtResource("4_mnc83")
 })
 
 [node name="shutdown" parent="." unique_id=292845353 instance=ExtResource("4_cvdxb")]
@@ -88,6 +90,7 @@ size = Vector2i(640, 440)
 render_target_update_mode = 4
 
 [node name="background" type="TextureRect" parent="pc/SubViewportContainer/windowroot" unique_id=862976209]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -142,16 +145,6 @@ theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 icon = SubResource("AtlasTexture_j3oem")
 flat = true
-
-[node name="apps" type="GridContainer" parent="pc/SubViewportContainer/windowroot" unique_id=1828823194]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 10
 
 [node name="shutdownprompt" parent="pc/SubViewportContainer/windowroot" unique_id=1825997023 instance=ExtResource("5_mfavi")]
 unique_name_in_owner = true
@@ -244,6 +237,7 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 text = "12:42"
 
+[connection signal="pressed" from="pc/SubViewportContainer/windowroot/settings" to="." method="app_icon_pressed" binds= [2]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/search" to="." method="app_icon_pressed" binds= [1]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/text" to="." method="app_icon_pressed" binds= [0]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/checklist" to="." method="app_icon_pressed" binds= [0]]

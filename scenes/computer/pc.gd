@@ -44,12 +44,15 @@ func app_icon_pressed(id: int) -> void:
 		create_window(id,window_scenes[id])
 	
 
+func change_background(texture:Texture) -> void:
+	%background.texture = texture
 
 func on_power_pressed() -> void:
 	%shutdownprompt.open()
 	%shutdownprompt.size = Vector2i(350,100)
 	
-
+func _ready() -> void:
+	GameManager.update_background.connect(change_background)
 
 var shutdown_tick_seconds:float = 0.5
 var shutdown_tick_count:int = 8

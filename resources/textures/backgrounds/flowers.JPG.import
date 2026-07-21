@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkgqgabnxmfcm"
-path="res://.godot/imported/chickstock.jpg-2ec74c8b81575d1197faa3cbc5679cd2.ctex"
+uid="uid://cboiiedr5l8ke"
+path="res://.godot/imported/flowers.JPG-ffbc4ed9dfff6525a48e83666a745f26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/textures/backgrounds/chickstock.jpg"
-dest_files=["res://.godot/imported/chickstock.jpg-2ec74c8b81575d1197faa3cbc5679cd2.ctex"]
+source_file="res://resources/textures/backgrounds/flowers.JPG"
+dest_files=["res://.godot/imported/flowers.JPG-ffbc4ed9dfff6525a48e83666a745f26.ctex"]
 
 [params]
 

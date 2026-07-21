@@ -14,7 +14,7 @@ var forbidden_pages:Array[String] = [
 @export var load_bar:ProgressBar
 @export var url_bar:LineEdit
 var current_url:String = ""
-var load_time:float = 4
+@export var load_time:float = 2.5
 var tween:Tween
 func _on_refresh_pressed() -> void:
 	load_page(current_url)

@@ -10,6 +10,8 @@ var productivity_place_quota:int = 80
 var written_words:int = 0
 var workers:Array[Worker]
 var worker_potential_names:PackedStringArray
+signal update_background(background:Texture)
+
 const NAME_PATH:String = "res://resources/workernames.txt"
 
 func add_productivity(amount:float) -> void:
@@ -18,6 +20,7 @@ func add_productivity(amount:float) -> void:
 func _ready() -> void:
 	read_names()
 	initialise_workers()
+	update_time()
 
 func read_names() -> void:
 	var file := FileAccess.open(NAME_PATH,FileAccess.READ)

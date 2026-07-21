@@ -9,7 +9,7 @@ bg_color = Color(0.38497776, 0.6479915, 0.6992921, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glxhp"]
 
-[node name="office" type="PanelContainer" unique_id=925044447 node_paths=PackedStringArray("leaderboard", "fireplace")]
+[node name="office" type="PanelContainer" unique_id=925044447 node_paths=PackedStringArray("leaderboard", "yourplace_label", "fireplace")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,6 +20,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
 script = ExtResource("1_ohufy")
 leaderboard = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/leaderboard")
+yourplace_label = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/place")
 fireplace = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer/fireplace")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=756522904]
@@ -62,6 +63,16 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Bottom %s get removed from their place of employment! Good workers stay productive."
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=922495173]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="place" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=1788316939]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "You currently place at %s place with %s points"
 autowrap_mode = 2
 
 [node name="title" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=194974383]

@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://bhhax8nb1rlii"]
+
+[ext_resource type="Script" uid="uid://c6aov5wgs2qgw" path="res://scenes/computer/pcwindow.gd" id="1_v74ml"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emfdb"]
+bg_color = Color(0.9300808, 0.86610836, 0.69469357, 1)
+
+[node name="PCWindow" type="Window" unique_id=2045706123]
+oversampling_override = 1.0
+title = "Tasks"
+position = Vector2i(0, 36)
+size = Vector2i(350, 200)
+script = ExtResource("1_v74ml")
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=253295247]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_emfdb")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1692404615]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=838273370]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1784470436]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Tasks to Do:"
+autowrap_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=893602167]
+layout_mode = 2
+
+[node name="t1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1978411643]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Task1"
+
+[node name="p1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1149454510]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Done?"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1262550893]
+layout_mode = 2
+
+[node name="t2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=449309881]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Task1"
+
+[node name="p2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1653963007]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Done?"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=874092850]
+layout_mode = 2
+
+[node name="t3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=2013546182]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Task1"
+
+[node name="p3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1874812438]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Done?"
+horizontal_alignment = 2

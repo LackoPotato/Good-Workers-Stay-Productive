@@ -135,16 +135,6 @@ theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
 text = "office"
 flat = true
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=194005697]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxLine_fbbxg")
-theme_override_styles/pressed = SubResource("StyleBoxLine_fbbxg")
-theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
-text = "coffee"
-flat = true
-
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=485986377]
 layout_mode = 2
 size_flags_vertical = 3

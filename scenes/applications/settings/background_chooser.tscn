@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dttcks2f8mhgk"]
+
+[ext_resource type="Texture2D" uid="uid://df3q11tfcsx7i" path="res://resources/textures/backgrounds/white.tres" id="1_x0fh7"]
+[ext_resource type="Script" uid="uid://buqlls1w03q8o" path="res://scenes/applications/settings/background_chooser.gd" id="2_wfqpv"]
+
+[node name="texture" type="TextureButton" unique_id=187499263]
+custom_minimum_size = Vector2(32, 32)
+custom_maximum_size = Vector2(32, 32)
+texture_normal = ExtResource("1_x0fh7")
+texture_pressed = ExtResource("1_x0fh7")
+texture_hover = ExtResource("1_x0fh7")
+texture_disabled = ExtResource("1_x0fh7")
+texture_focused = ExtResource("1_x0fh7")
+stretch_mode = 0
+script = ExtResource("2_wfqpv")
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
