@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bl6ivyb06pm4f"]
+
+[ext_resource type="Script" uid="uid://bjy6g4i7brdhj" path="res://scenes/applications/settings/settings.gd" id="1_h6n3k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_18j1j"]
+bg_color = Color(0.5763628, 0.5599104, 0.85608125, 1)
+
+[node name="settings" type="Window" unique_id=264604196]
+oversampling_override = 1.0
+title = "Settings"
+position = Vector2i(0, 36)
+size = Vector2i(300, 200)
+script = ExtResource("1_h6n3k")
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1874159133]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_18j1j")
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer" unique_id=1051312861]
+layout_mode = 2
+current_tab = 0
+
+[node name="Sound" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=18853952]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Desktop" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1113330151]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Game" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1736872341]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

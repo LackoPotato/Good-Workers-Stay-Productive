@@ -24,6 +24,7 @@ enum POSITION{
 }
 var pcwindowtween:Tween
 var size_before_animation:Vector2i
+@onready var position_before_animation:Vector2i = (get_tree().root.content_scale_size/2)-size/2
 func _init() -> void:
 	add_theme_constant_override("resize_margin",8)
 	close_requested.connect(close)
@@ -53,6 +54,16 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_POSITION_CHANGED:
 		snap_to = get_corner()
 		request_snap.emit(self)
+		var screen_size := get_tree().root.content_scale_size
+		if position.y < window_title_size:
+			position.y = window_title_size
+		elif position.y > screen_size.y-taskmanager_size.y:
+			position.y = screen_size.y-taskmanager_size.y
+		if position.x < 0:
+			position.x = 0
+		elif position.x > screen_size.x:
+			position.x = screen_size.x
+
 
 
 func snap_to_corner() -> void:
@@ -68,10 +79,10 @@ func snap_to_corner() -> void:
 			position = Vector2i(screen_size.x-size.x,window_title_size)
 		POSITION.BOTTOMLEFT:
 			size = new_size
-			position = Vector2i(0,screen_size.y-size.y+window_title_size)
+			position = Vector2i(0,screen_size.y-size.y)
 		POSITION.BOTTOMRIGHT:
 			size = new_size
-			position = screen_size-size+Vector2i(0,window_title_size)
+			position = screen_size-size
 	snap_to = POSITION.NONE
 
 func launch_on_ready() -> void: #weird bypass where ready() is not called by my script on window open
@@ -83,8 +94,8 @@ func close() -> void:
 		is_open = false
 		if pcwindowtween and pcwindowtween.is_running():
 			pcwindowtween.kill()
-		size = size_before_animation
 		size_before_animation = size
+		position_before_animation = position
 		closed.emit(id)
 		grab_focus()
 		inactive.emit()
@@ -99,6 +110,7 @@ func open() -> void:
 		if pcwindowtween and pcwindowtween.is_running():
 			pcwindowtween.kill()
 		size.y = 0
+		position = position_before_animation
 		opened.emit()
 		pcwindowtween = get_tree().create_tween()
 		pcwindowtween.tween_callback(show)

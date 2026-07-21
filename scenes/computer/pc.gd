@@ -63,6 +63,8 @@ func shutdown() -> void:
 
 func set_snap(window:PCWindow) -> void:
 	self.apply_snap_window = window
+	for panel in snap_position_panels:
+		panel.self_modulate.a = 0
 	match window.snap_to:
 		PCWindow.POSITION.TOPLEFT:
 			%tl.self_modulate.a = 1
@@ -72,6 +74,7 @@ func set_snap(window:PCWindow) -> void:
 			%bl.self_modulate.a = 1
 		PCWindow.POSITION.BOTTOMRIGHT:
 			%br.self_modulate.a = 1
+			
 
 var apply_snap_window:PCWindow
 @onready var snap_position_panels:Array[Panel] = [%tl,%tr,%bl,%br]
@@ -79,8 +82,6 @@ func _input(event: InputEvent) -> void:
 	if apply_snap_window and event is InputEventMouseButton:
 		if not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			if apply_snap_window.snap_to:
-				print("snap!")
 				apply_snap_window.snap_to_corner()
-			else:
-				for panel in snap_position_panels:
-					panel.self_modulate.a = 0
+			for panel in snap_position_panels:
+				panel.self_modulate.a = 0

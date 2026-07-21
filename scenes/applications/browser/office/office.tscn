@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jpc5m6gyhjh0"]
 
-[ext_resource type="Script" uid="uid://bd5g3t7p16gbs" path="res://scenes/applications/browser/office.gd" id="1_ohufy"]
+[ext_resource type="Script" uid="uid://bd5g3t7p16gbs" path="res://scenes/applications/browser/office/office.gd" id="1_ohufy"]
 [ext_resource type="Texture2D" uid="uid://d1celmf7dxxll" path="res://resources/textures/browser/leaderboard.png" id="1_yxf07"]
 [ext_resource type="Texture2D" uid="uid://bwhr7oiatilth" path="res://resources/textures/browser/face.png" id="2_4k4nd"]
 
