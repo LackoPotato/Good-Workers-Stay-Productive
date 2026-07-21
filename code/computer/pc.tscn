@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://ndce6a2nllgd"]
 
-[ext_resource type="Script" uid="uid://bjygoi35xrdxs" path="res://scenes/computer/pc.gd" id="1_vj4ls"]
-[ext_resource type="PackedScene" uid="uid://bgsiv0ntn5jw1" path="res://scenes/applications/textedit/textedit.tscn" id="2_vj4ls"]
+[ext_resource type="Script" uid="uid://bjygoi35xrdxs" path="res://code/computer/pc.gd" id="1_vj4ls"]
+[ext_resource type="PackedScene" uid="uid://bgsiv0ntn5jw1" path="res://code/applications/textedit/textedit.tscn" id="2_vj4ls"]
 [ext_resource type="Texture2D" uid="uid://qvbxllyp5fvm" path="res://resources/textures/backgrounds/orangesky.JPG" id="2_xy2n0"]
-[ext_resource type="PackedScene" uid="uid://bnogyqw84l4fq" path="res://scenes/applications/notscape/notscape.tscn" id="3_udd7d"]
-[ext_resource type="PackedScene" uid="uid://jv3yvdoocdae" path="res://scenes/computer/shutdown.tscn" id="4_cvdxb"]
-[ext_resource type="PackedScene" uid="uid://bl6ivyb06pm4f" path="res://scenes/applications/settings/settings.tscn" id="4_mnc83"]
+[ext_resource type="PackedScene" uid="uid://bnogyqw84l4fq" path="res://code/applications/notscape/notscape.tscn" id="3_udd7d"]
+[ext_resource type="PackedScene" uid="uid://jv3yvdoocdae" path="res://code/computer/shutdown.tscn" id="4_cvdxb"]
+[ext_resource type="PackedScene" uid="uid://bl6ivyb06pm4f" path="res://code/applications/settings/settings.tscn" id="4_mnc83"]
 [ext_resource type="Texture2D" uid="uid://c82lahflywtd5" path="res://resources/textures/desktop/power.png" id="5_04i1l"]
-[ext_resource type="PackedScene" uid="uid://clud3jgqj0pg1" path="res://scenes/computer/shutdownprompt.tscn" id="5_mfavi"]
+[ext_resource type="PackedScene" uid="uid://bhhax8nb1rlii" path="res://code/applications/checklist/checklist.tscn" id="5_j3oem"]
+[ext_resource type="PackedScene" uid="uid://clud3jgqj0pg1" path="res://code/computer/shutdownprompt.tscn" id="5_mfavi"]
 [ext_resource type="Texture2D" uid="uid://d0nnvt67h10j3" path="res://resources/textures/desktop/apps.png" id="6_l37ko"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xy2n0"]
@@ -43,7 +44,7 @@ corner_radius_bottom_left = 20
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy2n0"]
 bg_color = Color(0.6236486, 0.33638436, 0.61486095, 1)
 
-[node name="Control" type="Control" unique_id=2083592552 node_paths=PackedStringArray("windowroot", "windowselectorroot")]
+[node name="Control" type="Control" unique_id=2083592552 node_paths=PackedStringArray("windowroot", "windowselectorroot", "gametimer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,11 +54,15 @@ grow_vertical = 2
 script = ExtResource("1_vj4ls")
 windowroot = NodePath("pc/SubViewportContainer/windowroot")
 windowselectorroot = NodePath("pc/taskmanager/HBoxContainer/MarginContainer/ScrollContainer/windowselectorroot")
+gametimer = NodePath("gametimer")
 window_scenes = Dictionary[int, PackedScene]({
 0: ExtResource("2_vj4ls"),
 1: ExtResource("3_udd7d"),
-2: ExtResource("4_mnc83")
+2: ExtResource("4_mnc83"),
+3: ExtResource("5_j3oem")
 })
+
+[node name="gametimer" type="Timer" parent="." unique_id=602252142]
 
 [node name="shutdown" parent="." unique_id=292845353 instance=ExtResource("4_cvdxb")]
 unique_name_in_owner = true
@@ -234,13 +239,15 @@ layout_mode = 2
 theme_override_constants/margin_right = 10
 
 [node name="time" type="Label" parent="pc/taskmanager/HBoxContainer/HBoxContainer/MarginContainer" unique_id=1649499009]
+unique_name_in_owner = true
 layout_mode = 2
 text = "12:42"
 
+[connection signal="timeout" from="gametimer" to="." method="_on_gametimer_timeout"]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/settings" to="." method="app_icon_pressed" binds= [2]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/search" to="." method="app_icon_pressed" binds= [1]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/text" to="." method="app_icon_pressed" binds= [0]]
-[connection signal="pressed" from="pc/SubViewportContainer/windowroot/checklist" to="." method="app_icon_pressed" binds= [0]]
+[connection signal="pressed" from="pc/SubViewportContainer/windowroot/checklist" to="." method="app_icon_pressed" binds= [3]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/dialer" to="." method="app_icon_pressed" binds= [0]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/shutdownprompt/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/yes" to="." method="shutdown"]
 [connection signal="pressed" from="pc/taskmanager/HBoxContainer/Button" to="." method="on_power_pressed"]

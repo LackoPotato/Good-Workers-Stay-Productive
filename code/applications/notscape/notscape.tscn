@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://bnogyqw84l4fq"]
 
-[ext_resource type="Script" uid="uid://bx4sq5xrx62ao" path="res://scenes/applications/notscape/notscape.gd" id="1_qpyk0"]
+[ext_resource type="Script" uid="uid://bx4sq5xrx62ao" path="res://code/applications/notscape/notscape.gd" id="1_qpyk0"]
 [ext_resource type="StyleBox" uid="uid://0jaqqlvk0da" path="res://resources/window/backgroundpanel.tres" id="1_w684a"]
 [ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://resources/window/toolbar.tres" id="2_glxhp"]
 [ext_resource type="StyleBox" uid="uid://wcie437jly2x" path="res://resources/window/searchbar.tres" id="3_glxhp"]
 [ext_resource type="Texture2D" uid="uid://bccint8d0ek38" path="res://resources/textures/browser/refresh.png" id="4_qpyk0"]
-[ext_resource type="PackedScene" uid="uid://jpc5m6gyhjh0" path="res://scenes/applications/browser/office/office.tscn" id="5_qq4q3"]
-[ext_resource type="PackedScene" uid="uid://dtkgmo4wi1os3" path="res://scenes/applications/browser/blocked.tscn" id="7_jv5lw"]
-[ext_resource type="PackedScene" uid="uid://omal3yas3pkd" path="res://scenes/applications/browser/skg.tscn" id="8_0550l"]
-[ext_resource type="PackedScene" uid="uid://cvah1uvd3er57" path="res://scenes/applications/browser/notfound.tscn" id="9_8ersy"]
+[ext_resource type="PackedScene" uid="uid://jpc5m6gyhjh0" path="res://code/applications/browser/office/office.tscn" id="5_qq4q3"]
+[ext_resource type="PackedScene" uid="uid://dtkgmo4wi1os3" path="res://code/applications/browser/blocked.tscn" id="7_jv5lw"]
+[ext_resource type="PackedScene" uid="uid://omal3yas3pkd" path="res://code/applications/browser/skg.tscn" id="8_0550l"]
+[ext_resource type="PackedScene" uid="uid://cvah1uvd3er57" path="res://code/applications/browser/notfound.tscn" id="9_8ersy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w684a"]
 bg_color = Color(0.5801771, 0.61984015, 0.61229026, 1)

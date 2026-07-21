@@ -1,9 +1,20 @@
 extends Control
 @export var windowroot:SubViewport
 @export var windowselectorroot:HBoxContainer
-
+@export var gametimer:Timer
 var active_windows:Dictionary[int,PCWindow]
 @export var window_scenes:Dictionary[int,PackedScene]
+
+func _ready() -> void:
+	GameManager.update_background.connect(change_background)
+	start_day()
+
+func start_day() -> void:
+	gametimer.start()
+	GameManager.time = 0
+	GameManager.start()
+	%time.text = GameManager.get_string_time()
+
 func create_window(id:int,scene:PackedScene) -> PCWindow:
 	if id in active_windows:
 		active_windows[id].open()
@@ -51,8 +62,7 @@ func on_power_pressed() -> void:
 	%shutdownprompt.open()
 	%shutdownprompt.size = Vector2i(350,100)
 	
-func _ready() -> void:
-	GameManager.update_background.connect(change_background)
+
 
 var shutdown_tick_seconds:float = 0.5
 var shutdown_tick_count:int = 8
@@ -88,3 +98,8 @@ func _input(event: InputEvent) -> void:
 				apply_snap_window.snap_to_corner()
 			for panel in snap_position_panels:
 				panel.self_modulate.a = 0
+
+
+func _on_gametimer_timeout() -> void:
+	GameManager.tick()
+	%time.text = GameManager.get_string_time()

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://0rwaew2vuxjx"]
+
+[node name="task" type="HBoxContainer" unique_id=1355490432]
+
+[node name="task" type="Label" parent="." unique_id=1013498557]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Task1"
+
+[node name="progress" type="Label" parent="." unique_id=1610073483]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Done?"
+horizontal_alignment = 2

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bhhax8nb1rlii"]
+
+[ext_resource type="Script" uid="uid://bhn2ape3btqtn" path="res://code/applications/checklist/checklist.gd" id="1_2nud3"]
+[ext_resource type="PackedScene" uid="uid://0rwaew2vuxjx" path="res://code/applications/checklist/task.tscn" id="2_0s0p7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emfdb"]
+bg_color = Color(0.9213138, 0.7768023, 0.5901648, 1)
+
+[node name="PCWindow" type="Window" unique_id=2045706123 node_paths=PackedStringArray("tasks_root")]
+oversampling_override = 1.0
+title = "Tasks"
+position = Vector2i(0, 36)
+size = Vector2i(350, 200)
+script = ExtResource("1_2nud3")
+tasks_root = NodePath("PanelContainer/MarginContainer/VBoxContainer/tasks")
+task_scene = ExtResource("2_0s0p7")
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=253295247]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_emfdb")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1692404615]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=838273370]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1784470436]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Tasks to Do:"
+autowrap_mode = 2
+
+[node name="tasks" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1987049048]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="PanelContainer/MarginContainer/VBoxContainer/tasks" unique_id=1355490432 instance=ExtResource("2_0s0p7")]
+layout_mode = 2
+
+[connection signal="opened" from="." to="." method="_on_opened"]

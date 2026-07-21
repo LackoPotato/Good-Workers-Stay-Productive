@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bl6ivyb06pm4f"]
 
-[ext_resource type="Script" uid="uid://bjy6g4i7brdhj" path="res://scenes/applications/settings/settings.gd" id="1_h6n3k"]
-[ext_resource type="PackedScene" uid="uid://dttcks2f8mhgk" path="res://scenes/applications/settings/background_chooser.tscn" id="2_b6xre"]
+[ext_resource type="Script" uid="uid://bjy6g4i7brdhj" path="res://code/applications/settings/settings.gd" id="1_h6n3k"]
+[ext_resource type="PackedScene" uid="uid://dttcks2f8mhgk" path="res://code/applications/settings/background_chooser.tscn" id="2_b6xre"]
 [ext_resource type="Texture2D" uid="uid://cboiiedr5l8ke" path="res://resources/textures/backgrounds/flowers.JPG" id="2_m6283"]
 [ext_resource type="Texture2D" uid="uid://brcdacke2jlwr" path="res://resources/textures/backgrounds/city.JPG" id="3_b1iu3"]
 [ext_resource type="Texture2D" uid="uid://c5e37u4qvogg3" path="res://resources/textures/backgrounds/horse.JPG" id="4_4mpun"]

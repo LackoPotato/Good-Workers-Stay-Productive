@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clud3jgqj0pg1"]
 
-[ext_resource type="Script" uid="uid://c6aov5wgs2qgw" path="res://scenes/computer/pcwindow.gd" id="1_xy4g5"]
+[ext_resource type="Script" uid="uid://c6aov5wgs2qgw" path="res://code/computer/pcwindow.gd" id="1_xy4g5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04i1l"]
 

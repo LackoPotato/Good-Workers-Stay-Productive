@@ -4,8 +4,8 @@ class_name PCWindow
 @export var open_on_ready:bool = true
 signal active()
 signal inactive()
-signal closed(id:int)
-signal opened(id:int)
+signal closed()
+signal opened()
 signal updated_text(text:String)
 signal request_snap(window:PCWindow)
 var is_open:bool = false

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dttcks2f8mhgk"]
 
 [ext_resource type="Texture2D" uid="uid://df3q11tfcsx7i" path="res://resources/textures/backgrounds/white.tres" id="1_x0fh7"]
-[ext_resource type="Script" uid="uid://buqlls1w03q8o" path="res://scenes/applications/settings/background_chooser.gd" id="2_wfqpv"]
+[ext_resource type="Script" uid="uid://buqlls1w03q8o" path="res://code/applications/settings/background_chooser.gd" id="2_wfqpv"]
 
 [node name="texture" type="TextureButton" unique_id=187499263]
 custom_minimum_size = Vector2(32, 32)
