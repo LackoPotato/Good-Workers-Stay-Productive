@@ -1,21 +1,35 @@
 [gd_scene format=3 uid="uid://bnogyqw84l4fq"]
 
-[ext_resource type="StyleBox" uid="uid://0jaqqlvk0da" path="res://scenes/window/backgroundpanel.tres" id="1_w684a"]
-[ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://scenes/window/toolbar.tres" id="2_glxhp"]
+[ext_resource type="Script" uid="uid://bx4sq5xrx62ao" path="res://scenes/applications/notscape.gd" id="1_qpyk0"]
+[ext_resource type="StyleBox" uid="uid://0jaqqlvk0da" path="res://resources/window/backgroundpanel.tres" id="1_w684a"]
+[ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://resources/window/toolbar.tres" id="2_glxhp"]
+[ext_resource type="StyleBox" uid="uid://wcie437jly2x" path="res://resources/window/searchbar.tres" id="3_glxhp"]
+[ext_resource type="Texture2D" uid="uid://bccint8d0ek38" path="res://resources/textures/browser/refresh.png" id="4_qpyk0"]
+[ext_resource type="PackedScene" uid="uid://jpc5m6gyhjh0" path="res://scenes/applications/browser/office.tscn" id="5_qq4q3"]
+[ext_resource type="PackedScene" uid="uid://dtkgmo4wi1os3" path="res://scenes/applications/browser/blocked.tscn" id="7_jv5lw"]
+[ext_resource type="PackedScene" uid="uid://omal3yas3pkd" path="res://scenes/applications/browser/skg.tscn" id="8_0550l"]
+[ext_resource type="PackedScene" uid="uid://cvah1uvd3er57" path="res://scenes/applications/browser/notfound.tscn" id="9_8ersy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w684a"]
 bg_color = Color(0.5801771, 0.61984015, 0.61229026, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng01d"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-expand_margin_left = 10.0
-expand_margin_right = 10.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
+bg_color = Color(0.5803922, 0.61960787, 0.6117647, 1)
 
-[node name="PanelContainer" type="PanelContainer" unique_id=1529041960]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fbbxg"]
+
+[node name="PCWindow" type="Window" unique_id=795717025 node_paths=PackedStringArray("page_root", "load_bar", "url_bar")]
+oversampling_override = 1.0
+title = "Browser"
+initial_position = 1
+size = Vector2i(350, 200)
+script = ExtResource("1_qpyk0")
+page_root = NodePath("PanelContainer/VBoxContainer/ScrollContainer")
+load_bar = NodePath("PanelContainer/VBoxContainer/ProgressBar")
+url_bar = NodePath("PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer/LineEdit")
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1529041960]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,15 +37,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_w684a")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1277073093]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1277073093]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="shortcuts" type="PanelContainer" parent="VBoxContainer" unique_id=440607796]
+[node name="shortcuts" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=440607796]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_glxhp")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/shortcuts" unique_id=297679753]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/shortcuts" unique_id=1689948503]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/shortcuts/MarginContainer" unique_id=297679753]
 texture_filter = 1
 clip_contents = false
 layout_mode = 2
@@ -50,29 +69,112 @@ text = "[table=7][cell][u]F[/u]ile [/cell][cell][u]E[/u]dit [/cell]
 [cell][u]D[/u]irectory [/cell][table]"
 fit_content = true
 
-[node name="searchbar" type="PanelContainer" parent="VBoxContainer" unique_id=1879027653]
+[node name="searchbar" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1879027653]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_w684a")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/searchbar" unique_id=1877541697]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/searchbar" unique_id=1709280036]
 layout_mode = 2
-theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/searchbar/MarginContainer" unique_id=600640599]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer" unique_id=1234951027]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="refresh" type="Button" parent="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer2" unique_id=1768214945]
+custom_minimum_size = Vector2(32, 16)
+layout_mode = 2
+icon = ExtResource("4_qpyk0")
+flat = true
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer" unique_id=1877541697]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 5
 
-[node name="Label" type="Label" parent="VBoxContainer/searchbar/MarginContainer" unique_id=1644888691]
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer" unique_id=1638540509]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_ng01d")
-text = "https://mmm.coffeecam.com"
+theme_override_styles/normal = ExtResource("3_glxhp")
+theme_override_styles/read_only = ExtResource("3_glxhp")
+theme_override_styles/focus = ExtResource("3_glxhp")
 
-[node name="shortcuts2" type="PanelContainer" parent="VBoxContainer" unique_id=1848823461]
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer" unique_id=1728665117]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_fbbxg")
+value = 100.0
+show_percentage = false
+
+[node name="shortcuts2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=1848823461]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_glxhp")
 
-[node name="Label" type="Label" parent="VBoxContainer/shortcuts2" unique_id=1023037994]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/shortcuts2" unique_id=1501872067]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer" unique_id=87780300]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=862993999]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "what"
+theme_override_styles/normal = SubResource("StyleBoxLine_fbbxg")
+theme_override_styles/pressed = SubResource("StyleBoxLine_fbbxg")
+theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
+text = "office"
+flat = true
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=194005697]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxLine_fbbxg")
+theme_override_styles/pressed = SubResource("StyleBoxLine_fbbxg")
+theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
+text = "coffee"
+flat = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=485986377]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="office" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=925044447 instance=ExtResource("5_qq4q3")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="blocked" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1825914515 instance=ExtResource("7_jv5lw")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="skg" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=347534363 instance=ExtResource("8_0550l")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="notfound" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1479728653 instance=ExtResource("9_8ersy")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer2/refresh" to="." method="_on_refresh_pressed"]
+[connection signal="text_submitted" from="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer/LineEdit" to="." method="_on_search_submitted"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer/Button" to="." method="load_page" binds= ["http://mmm.officetracker.com/leaderboard"]]

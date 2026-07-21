@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://omal3yas3pkd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yua8a"]
+bg_color = Color(0.34901962, 0.6627451, 0.20392157, 1)
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1825914515]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yua8a")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=57037481]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=442825972]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=1621014320]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=1380100061]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1880223476]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = ":)"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1979806353]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=651061781]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Keep on fighting!"
+vertical_alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=118854382]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Stop Killing Games!"
+autowrap_mode = 3

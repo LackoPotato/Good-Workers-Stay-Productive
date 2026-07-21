@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://jpc5m6gyhjh0"]
+
+[ext_resource type="Script" uid="uid://bd5g3t7p16gbs" path="res://scenes/applications/browser/office.gd" id="1_ohufy"]
+[ext_resource type="Texture2D" uid="uid://d1celmf7dxxll" path="res://resources/textures/browser/leaderboard.png" id="1_yxf07"]
+[ext_resource type="Texture2D" uid="uid://bwhr7oiatilth" path="res://resources/textures/browser/face.png" id="2_4k4nd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
+bg_color = Color(0.38497776, 0.6479915, 0.6992921, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glxhp"]
+
+[node name="office" type="PanelContainer" unique_id=925044447 node_paths=PackedStringArray("leaderboard", "fireplace")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
+script = ExtResource("1_ohufy")
+leaderboard = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/leaderboard")
+fireplace = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer/fireplace")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=756522904]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1425318195]
+custom_minimum_size = Vector2(300, 0)
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_glxhp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=727251033]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=201123427]
+layout_mode = 2
+texture = ExtResource("1_yxf07")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1901916542]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=584657207]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=543944168]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="fireplace" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=86245739]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Bottom %s get removed from their place of employment! Good workers stay productive."
+autowrap_mode = 2
+
+[node name="title" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=194974383]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "productivity leaderboard"
+
+[node name="leaderboard" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1020698153]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[fill]{daswas}[/fill]"
+fit_content = true
+scroll_active = false
+
+[node name="Control" type="Control" parent="." unique_id=1422551088]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control" unique_id=1437716242]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 38.0
+offset_right = 1140.0
+offset_bottom = 58.0
+text = "get back to work"
+
+[node name="Label2" type="Label" parent="Control" unique_id=930364860]
+layout_mode = 0
+offset_left = 1177.0
+offset_top = 145.0
+offset_right = 1817.0
+offset_bottom = 165.0
+text = "there is nothing here"
+
+[node name="Label3" type="Label" parent="Control" unique_id=1773766627]
+layout_mode = 0
+offset_left = 2150.0
+offset_top = 274.0
+offset_right = 2790.0
+offset_bottom = 294.0
+text = "and you probably have wasted too much time"
+
+[node name="Label4" type="Label" parent="Control" unique_id=201124556]
+layout_mode = 0
+offset_left = 3120.0
+offset_top = 115.0
+offset_right = 3760.0
+offset_bottom = 135.0
+text = "ok actually go back to work"
+
+[node name="Face" type="Sprite2D" parent="Control" unique_id=1978799819]
+position = Vector2(3378, 96)
+texture = ExtResource("2_4k4nd")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

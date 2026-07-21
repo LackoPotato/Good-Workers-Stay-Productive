@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://jv3yvdoocdae"]
+
+[ext_resource type="Script" uid="uid://bvmbn74ofdy6j" path="res://scenes/computer/shutdown.gd" id="1_vjxpo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
+bg_color = Color(0.3322559, 0.51192456, 0.81724477, 1)
+
+[node name="shutdown" type="PanelContainer" unique_id=292845353 node_paths=PackedStringArray("smileylabel", "shuttinglabel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
+script = ExtResource("1_vjxpo")
+smileylabel = NodePath("MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/smiley")
+shuttinglabel = NodePath("MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/shuttingdown")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1474630191]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=121448504]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2" unique_id=1948175629]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=606651892]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="smiley" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=321499669]
+custom_minimum_size = Vector2(41, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " \\
+:D"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer" unique_id=1931231199]
+layout_mode = 2
+alignment = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=843530528]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "goodbye!"
+vertical_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer2/VBoxContainer" unique_id=226704483]
+layout_mode = 2
+alignment = 1
+
+[node name="shuttingdown" type="Label" parent="MarginContainer/VBoxContainer2/VBoxContainer/HBoxContainer2" unique_id=2083007351]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "shutting down your pc..."

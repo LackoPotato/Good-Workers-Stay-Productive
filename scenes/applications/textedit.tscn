@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://bgsiv0ntn5jw1"]
 
-[ext_resource type="StyleBox" uid="uid://0jaqqlvk0da" path="res://scenes/window/backgroundpanel.tres" id="1_vvpal"]
+[ext_resource type="StyleBox" uid="uid://0jaqqlvk0da" path="res://resources/window/backgroundpanel.tres" id="1_vvpal"]
 [ext_resource type="Script" uid="uid://dlmnl6x4oq4bh" path="res://scenes/applications/textedit.gd" id="2_j4mio"]
-[ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://scenes/window/toolbar.tres" id="3_io13l"]
+[ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://resources/window/toolbar.tres" id="3_io13l"]
 
 [node name="PCWindow" type="Window" unique_id=478694275 node_paths=PackedStringArray("document", "editor")]
 oversampling_override = 1.0
-position = Vector2i(0, 36)
+title = "Unititled Document"
+initial_position = 1
 size = Vector2i(350, 200)
 theme_override_constants/resize_margin = 8
 script = ExtResource("2_j4mio")

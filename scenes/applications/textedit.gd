@@ -45,6 +45,7 @@ func _physics_process(_delta: float) -> void:
 	document.text = finished+get_edited_word()
 
 func score() -> void:
+	GameManager.add_productivity(1)
 	finished += editor.text
 	editor.text = ""
 	word_index += 1

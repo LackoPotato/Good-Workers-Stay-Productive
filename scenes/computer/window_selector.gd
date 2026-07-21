@@ -23,7 +23,7 @@ func select() -> void:
 		active = false
 
 func deselect() -> void:
-	if not active:
+	if not active and get_tree():
 		if tween and tween.is_running():
 			tween.kill()
 			offset_transform_scale = selected_scale

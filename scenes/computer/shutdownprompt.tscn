@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://clud3jgqj0pg1"]
+
+[ext_resource type="Script" uid="uid://c6aov5wgs2qgw" path="res://scenes/computer/pcwindow.gd" id="1_xy4g5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04i1l"]
+
+[node name="PCWindow" type="Window" unique_id=1183514913]
+oversampling_override = 1.0
+title = "shutdown"
+initial_position = 1
+size = Vector2i(350, 100)
+script = ExtResource("1_xy4g5")
+id = -10
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=543378362]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_04i1l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=927712067]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=800655106]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer" unique_id=1531829604]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer2" unique_id=152450506]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "?:|"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer2" unique_id=1402391661]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer2/VBoxContainer" unique_id=1521947774]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "would you like to shut down your pc
+and stop being productive? (ends your day)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=125047952]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=680390378]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="yes" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer" unique_id=1034103399]
+layout_mode = 2
+text = "yeah"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=636118776]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="no" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2" unique_id=1520653183]
+layout_mode = 2
+text = "no"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer2/no" to="." method="close"]
