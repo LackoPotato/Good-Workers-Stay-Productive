@@ -34,9 +34,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_18j1j")
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer" unique_id=1051312861]
 layout_mode = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Desktop" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1113330151]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -199,11 +200,54 @@ texture = ExtResource("8_6ksix")
 layout_mode = 2
 texture = ExtResource("8_irmci")
 
-[node name="Game" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1736872341]
-visible = false
+[node name="Game" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1439645511]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 metadata/_tab_index = 1
 
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/TabContainer/Game" unique_id=209950121]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/TabContainer/Game/VBoxContainer3" unique_id=1590407614]
+layout_mode = 2
+
+[node name="time2" type="HBoxContainer" parent="PanelContainer/TabContainer/Game/VBoxContainer3/VBoxContainer2" unique_id=402860378]
+layout_mode = 2
+
+[node name="tslabel" type="Label" parent="PanelContainer/TabContainer/Game/VBoxContainer3/VBoxContainer2/time2" unique_id=499117695]
+layout_mode = 2
+text = "Time Scale"
+
+[node name="timescale" type="HSlider" parent="PanelContainer/TabContainer/Game/VBoxContainer3/VBoxContainer2/time2" unique_id=2086747821]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 50.0
+max_value = 350.0
+step = 10.0
+value = 200.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="time" type="Label" parent="PanelContainer/TabContainer/Game/VBoxContainer3/VBoxContainer2" unique_id=517760436]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Every second that passes %s
+seconds pass in game."
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/Game/VBoxContainer3" unique_id=753343018]
+layout_mode = 2
+text = "Reset Game Settings"
+
+[node name="restart" type="Button" parent="PanelContainer/TabContainer/Game/VBoxContainer3" unique_id=252927905]
+layout_mode = 2
+text = "Restart Game"
+
+[connection signal="opened" from="." to="." method="_on_opened"]
 [connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Master" to="." method="_on_master_value_changed"]
 [connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Music" to="." method="_on_music_value_changed"]
 [connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Sound" to="." method="_on_sound_value_changed"]
@@ -217,3 +261,6 @@ metadata/_tab_index = 1
 [connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/blue" to="." method="set_background"]
 [connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/pink" to="." method="set_background"]
 [connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/white" to="." method="set_background"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/Game/VBoxContainer3/VBoxContainer2/time2/timescale" to="." method="update_time_scale"]
+[connection signal="pressed" from="PanelContainer/TabContainer/Game/VBoxContainer3/Button" to="." method="on_reset_game_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/TabContainer/Game/VBoxContainer3/restart" to="." method="_on_restart_pressed"]

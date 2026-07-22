@@ -116,8 +116,8 @@ icon = SubResource("AtlasTexture_fbbxg")
 flat = true
 
 [node name="search" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1805745149]
-offset_left = 504.0
-offset_right = 576.0
+offset_left = 144.0
+offset_right = 216.0
 offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
@@ -133,8 +133,8 @@ icon = SubResource("AtlasTexture_vj4ls")
 flat = true
 
 [node name="checklist" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1894593399]
-offset_left = 432.0
-offset_right = 504.0
+offset_left = 216.0
+offset_right = 288.0
 offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
@@ -142,10 +142,9 @@ icon = SubResource("AtlasTexture_mnc83")
 flat = true
 
 [node name="dialer" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1829762544]
-offset_left = 504.0
-offset_top = 72.0
-offset_right = 576.0
-offset_bottom = 144.0
+offset_left = 288.0
+offset_right = 360.0
+offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 icon = SubResource("AtlasTexture_j3oem")

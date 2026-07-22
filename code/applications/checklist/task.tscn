@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://0rwaew2vuxjx"]
 
+[ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="1_8lqof"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_136h1"]
+script = ExtResource("1_8lqof")
+metadata/_custom_type_script = "uid://dix8ymsrpd2uj"
+
 [node name="task" type="HBoxContainer" unique_id=1355490432]
+offset_transform_enabled = true
 
 [node name="task" type="Label" parent="." unique_id=1013498557]
 unique_name_in_owner = true
@@ -8,9 +15,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Task1"
 
-[node name="progress" type="Label" parent="." unique_id=1610073483]
+[node name="progress" type="RichTextLabel" parent="." unique_id=1522870181]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Done?"
-horizontal_alignment = 2
+bbcode_enabled = true
+text = "[scroll time=0.2]87[/scroll]/32"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+custom_effects = [SubResource("RichTextEffect_136h1")]

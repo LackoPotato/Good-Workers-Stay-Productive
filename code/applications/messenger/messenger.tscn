@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://hj5opt22u0at"]
+
+[ext_resource type="Script" uid="uid://c6aov5wgs2qgw" path="res://code/computer/pcwindow.gd" id="1_5ff28"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
+bg_color = Color(0.45448655, 0.6213624, 0.7590235, 1)
+
+[node name="PCWindow" type="Window" unique_id=994677479]
+oversampling_override = 1.0
+title = "Messenger"
+position = Vector2i(0, 36)
+size = Vector2i(350, 200)
+script = ExtResource("1_5ff28")
+metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=231574148]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")

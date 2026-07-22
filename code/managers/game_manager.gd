@@ -1,7 +1,8 @@
 extends Node
 var day:int = 1
 var time:int = 0
-var max_time:int = 216
+var default_max_time:int = 200
+var max_time:int = 200
 var work_start_time:int = 32400
 var work_end_time:int = 75600
 var you:Worker = Worker.new("You",0,0,0,0,0,[0,0,0,0,0,0,0])
@@ -12,6 +13,10 @@ var workers:Array[Worker]
 var worker_potential_names:PackedStringArray
 
 var productivity_scale:float = 1
+var background:Texture = preload("res://resources/textures/backgrounds/orangesky.JPG"):
+	set(t):
+		background = t
+		update_background.emit(t)
 signal update_background(background:Texture)
 
 const NAME_PATH:String = "res://resources/workernames.txt"
@@ -21,6 +26,7 @@ func add_productivity(amount:float) -> void:
 
 func _ready() -> void:
 	read_names()
+	task_finished.connect(on_task_finished)
 
 func start() -> void:
 	initialise_workers()
@@ -79,9 +85,11 @@ class Worker:
 		var hourly_variance:float = rng.randf_range(hourly_variance_min,hourly_variance_max)
 		return base_work+daily_variance+hourly_variance
 
+func get_time_ratio() -> float:
+	return float(work_end_time-work_start_time)/max_time
+
 func get_string_time() -> String:
-	var irlseconds_per_igtseconds:float = float(work_end_time-work_start_time)/max_time
-	var irlseconds:float = irlseconds_per_igtseconds * time + work_start_time
+	var irlseconds:float = get_time_ratio() * time + work_start_time
 	var minutes:int = int(irlseconds/60) % 60
 	var hours:int = int(irlseconds/3600)
 	return "%d:%02d" % [hours,minutes]
@@ -89,10 +97,17 @@ func get_string_time() -> String:
 var tasks:Array[Task]:
 	set(t):
 		tasks = t
-		update_tasks.emit()
+		tasks_updated.emit()
 var max_tasks:int = 3
-var unlocked_tasks:Array[Task.ValidTasks] = [0,1]
-signal update_tasks()
+@warning_ignore("int_as_enum_without_cast")
+var unlocked_tasks:Array[Task.ValidTasks] = [0]
+signal tasks_updated()
+signal task_finished(index:int)
+
+func on_task_finished(index:int):
+	add_productivity(tasks[index].get_rewarded_productivity())
+	tasks.remove_at(index)
+	tasks.append(get_random_task())
 
 func generate_tasks() -> void:
 	tasks.clear()
@@ -103,3 +118,12 @@ func get_random_task() -> Task:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 	return Task.make_task(unlocked_tasks[rng.randi_range(0,len(unlocked_tasks)-1)])
+
+func update_tasks(type:Task.ValidTasks,progress:int) -> void:
+	for i in len(tasks):
+		var task:Task = tasks[i]
+		if task.get_type() == type:
+			if task.add_progress(progress):
+				task_finished.emit(i)
+			tasks_updated.emit()
+			break

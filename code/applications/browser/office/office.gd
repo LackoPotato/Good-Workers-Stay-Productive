@@ -1,10 +1,10 @@
 extends PanelContainer
 @export var leaderboard:RichTextLabel
-@export var yourplace_label:Label
+@export var yourplace_label:RichTextLabel
 @export var fireplace:Label
-@export var yourplace_template:String = "You are currently at %s place with %s points!"
+@export var yourplace_template:String = "You are currently at [scroll time=0.1]%s[/scroll] place with [scroll time=0.1]%s[/scroll] points!"
 @export var leaderboard_template:String = "[table=3]%s[/table]"
-@export var leaderboard_place_template:String = "\t[cell]%s[/cell][cell]%s[/cell][cell]%s[/cell]"
+@export var leaderboard_place_template:String = "\t[cell]%s[/cell][cell]%s[/cell][cell][scroll time=0.1]%s[/scroll][/cell]"
 @export var fire_template:String = "Bottom %s get removed from their place of employment! Good workers stay productive."
 @export var player_surrounding_amount:int = 3
 
@@ -30,4 +30,5 @@ func sort(worker_a:GameManager.Worker,worker_b:GameManager.Worker) -> bool:
 	return worker_a.productivity > worker_b.productivity
 
 func _on_visibility_changed() -> void:
+	yourplace_label.text = ""
 	update_rankings()

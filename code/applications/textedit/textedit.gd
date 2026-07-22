@@ -7,6 +7,7 @@ var focused:bool = true
 var words:Array[RegExMatch]
 var word_index:int = 0
 var current_word:String
+var word_lookahead:int = 5
 var unfinished_template:String = "[color=#333333]%s[/color]"
 var wrong_template:String = "[s][color=#f91d04]%s[/color][/s]"
 var caret_template:String = "[bgcolor=#5a68ed]%s[/bgcolor]"
@@ -33,7 +34,12 @@ func get_edited_word() -> String:
 	else:
 		edited += wrong_template % escaped
 	edited += unfinished_template % current_word.substr(len(current))
-	
+	var lookahead:String = " "
+	for i in range(word_lookahead):
+		var index:int = (word_index+i+1) % len(words)
+		var word:String = words[index].get_string()
+		lookahead += "%s " %word
+	edited += unfinished_template % lookahead
 	return edited
 
 func correct_word() -> bool:
@@ -45,11 +51,12 @@ func _physics_process(_delta: float) -> void:
 	document.text = finished+get_edited_word()
 
 func score() -> void:
-	GameManager.add_productivity(1)
 	finished += editor.text
 	editor.text = ""
 	word_index += 1
+	word_index = word_index % len(words)
 	current_word = words[word_index].get_string()
+	GameManager.update_tasks(Task.ValidTasks.TEXT,1)
 
 func _on_editor_text_changed(new_text: String) -> void:
 	if new_text.contains(" "):

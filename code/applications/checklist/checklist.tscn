@@ -43,7 +43,4 @@ autowrap_mode = 2
 [node name="tasks" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1987049048]
 layout_mode = 2
 
-[node name="HBoxContainer2" parent="PanelContainer/MarginContainer/VBoxContainer/tasks" unique_id=1355490432 instance=ExtResource("2_0s0p7")]
-layout_mode = 2
-
 [connection signal="opened" from="." to="." method="_on_opened"]

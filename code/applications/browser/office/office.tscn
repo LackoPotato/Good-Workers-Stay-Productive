@@ -3,11 +3,20 @@
 [ext_resource type="Script" uid="uid://bd5g3t7p16gbs" path="res://code/applications/browser/office/office.gd" id="1_ohufy"]
 [ext_resource type="Texture2D" uid="uid://d1celmf7dxxll" path="res://resources/textures/browser/leaderboard.png" id="1_yxf07"]
 [ext_resource type="Texture2D" uid="uid://bwhr7oiatilth" path="res://resources/textures/browser/face.png" id="2_4k4nd"]
+[ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="3_1wjbi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
 bg_color = Color(0.38497776, 0.6479915, 0.6992921, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glxhp"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_i5rpj"]
+script = ExtResource("3_1wjbi")
+metadata/_custom_type_script = "uid://dix8ymsrpd2uj"
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_1wjbi"]
+script = ExtResource("3_1wjbi")
+metadata/_custom_type_script = "uid://dix8ymsrpd2uj"
 
 [node name="office" type="PanelContainer" unique_id=925044447 node_paths=PackedStringArray("leaderboard", "yourplace_label", "fireplace")]
 anchors_preset = 15
@@ -69,11 +78,14 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="place" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=1788316939]
+[node name="place" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2" unique_id=1384674844]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
 text = "You currently place at %s place with %s points"
-autowrap_mode = 2
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_i5rpj")]
 
 [node name="title" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=194974383]
 layout_mode = 2
@@ -87,6 +99,7 @@ bbcode_enabled = true
 text = "[fill]{daswas}[/fill]"
 fit_content = true
 scroll_active = false
+custom_effects = [SubResource("RichTextEffect_1wjbi")]
 
 [node name="Control" type="Control" parent="." unique_id=1422551088]
 layout_mode = 2

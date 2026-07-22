@@ -7,6 +7,7 @@ var active_windows:Dictionary[int,PCWindow]
 
 func _ready() -> void:
 	GameManager.update_background.connect(change_background)
+	change_background(GameManager.background)
 	start_day()
 
 func start_day() -> void:
