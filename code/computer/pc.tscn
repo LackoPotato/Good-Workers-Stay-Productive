@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bhhax8nb1rlii" path="res://code/applications/checklist/checklist.tscn" id="5_j3oem"]
 [ext_resource type="PackedScene" uid="uid://clud3jgqj0pg1" path="res://code/computer/shutdownprompt.tscn" id="5_mfavi"]
 [ext_resource type="Texture2D" uid="uid://d0nnvt67h10j3" path="res://resources/textures/desktop/apps.png" id="6_l37ko"]
+[ext_resource type="PackedScene" uid="uid://hj5opt22u0at" path="res://code/applications/messenger/messenger.tscn" id="6_ttuhk"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xy2n0"]
 load_path = "res://.godot/imported/apps.png-b56f9e0cd61ff647be7a631c09ec4661.ctex"
@@ -30,7 +31,7 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("6_l37ko")
 region = Rect2(0, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j3oem"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrgb7"]
 atlas = ExtResource("6_l37ko")
 region = Rect2(64, 64, 64, 64)
 
@@ -59,7 +60,8 @@ window_scenes = Dictionary[int, PackedScene]({
 0: ExtResource("2_vj4ls"),
 1: ExtResource("3_udd7d"),
 2: ExtResource("4_mnc83"),
-3: ExtResource("5_j3oem")
+3: ExtResource("5_j3oem"),
+4: ExtResource("6_ttuhk")
 })
 
 [node name="gametimer" type="Timer" parent="." unique_id=602252142]
@@ -141,13 +143,13 @@ theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 
 icon = SubResource("AtlasTexture_mnc83")
 flat = true
 
-[node name="dialer" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1829762544]
+[node name="messages" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1829762544]
 offset_left = 288.0
 offset_right = 360.0
 offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
-icon = SubResource("AtlasTexture_j3oem")
+icon = SubResource("AtlasTexture_rrgb7")
 flat = true
 
 [node name="shutdownprompt" parent="pc/SubViewportContainer/windowroot" unique_id=1825997023 instance=ExtResource("5_mfavi")]
@@ -247,7 +249,7 @@ text = "12:42"
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/search" to="." method="app_icon_pressed" binds= [1]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/text" to="." method="app_icon_pressed" binds= [0]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/checklist" to="." method="app_icon_pressed" binds= [3]]
-[connection signal="pressed" from="pc/SubViewportContainer/windowroot/dialer" to="." method="app_icon_pressed" binds= [0]]
+[connection signal="pressed" from="pc/SubViewportContainer/windowroot/messages" to="." method="app_icon_pressed" binds= [4]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/shutdownprompt/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/yes" to="." method="shutdown"]
 [connection signal="pressed" from="pc/taskmanager/HBoxContainer/Button" to="." method="on_power_pressed"]
 

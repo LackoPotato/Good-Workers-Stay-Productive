@@ -34,10 +34,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_18j1j")
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer" unique_id=1051312861]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Desktop" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1113330151]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -201,6 +200,7 @@ layout_mode = 2
 texture = ExtResource("8_irmci")
 
 [node name="Game" type="MarginContainer" parent="PanelContainer/TabContainer" unique_id=1439645511]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10

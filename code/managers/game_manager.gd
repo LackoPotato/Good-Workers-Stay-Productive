@@ -100,7 +100,7 @@ var tasks:Array[Task]:
 		tasks_updated.emit()
 var max_tasks:int = 3
 @warning_ignore("int_as_enum_without_cast")
-var unlocked_tasks:Array[Task.ValidTasks] = [0]
+var unlocked_tasks:Array[Task.ValidTasks] = [0,1]
 signal tasks_updated()
 signal task_finished(index:int)
 
@@ -115,9 +115,7 @@ func generate_tasks() -> void:
 		tasks.append(get_random_task())
 
 func get_random_task() -> Task:
-	var rng := RandomNumberGenerator.new()
-	rng.randomize()
-	return Task.make_task(unlocked_tasks[rng.randi_range(0,len(unlocked_tasks)-1)])
+	return Task.make_task(unlocked_tasks[randi_range(0,len(unlocked_tasks)-1)])
 
 func update_tasks(type:Task.ValidTasks,progress:int) -> void:
 	for i in len(tasks):

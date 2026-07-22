@@ -1,16 +1,64 @@
 [gd_scene format=3 uid="uid://hj5opt22u0at"]
 
-[ext_resource type="Script" uid="uid://c6aov5wgs2qgw" path="res://code/computer/pcwindow.gd" id="1_5ff28"]
+[ext_resource type="Script" uid="uid://jl2oqydf1lrg" path="res://code/applications/messenger/messenger.gd" id="1_dqs1r"]
+[ext_resource type="StyleBox" uid="uid://wcie437jly2x" path="res://resources/window/searchbar.tres" id="2_mpfgp"]
+[ext_resource type="Texture2D" uid="uid://3pti00nb18pq" path="res://resources/textures/arrows.png" id="3_mpfgp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mpfgp"]
+load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb7ou"]
+atlas = SubResource("CompressedTexture2D_mpfgp")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4xk2"]
+load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjnws"]
+atlas = SubResource("CompressedTexture2D_v4xk2")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_brulx"]
+load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy6vx"]
+atlas = SubResource("CompressedTexture2D_brulx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gwn4p"]
+load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtamq"]
+atlas = SubResource("CompressedTexture2D_gwn4p")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
 bg_color = Color(0.45448655, 0.6213624, 0.7590235, 1)
 
-[node name="PCWindow" type="Window" unique_id=994677479]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rq5xq"]
+bg_color = Color(0.28676438, 0.62454575, 0.91121733, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng01d"]
+bg_color = Color(0.10283553, 0.16150516, 0.32511386, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqs1r"]
+atlas = ExtResource("3_mpfgp")
+region = Rect2(0, 0, 32, 32)
+
+[node name="PCWindow" type="Window" unique_id=994677479 node_paths=PackedStringArray("sent_text", "customer_typing", "arrow_box", "typing_text")]
 oversampling_override = 1.0
 title = "Messenger"
 position = Vector2i(0, 36)
 size = Vector2i(350, 200)
-script = ExtResource("1_5ff28")
+script = ExtResource("1_dqs1r")
+sent_text = NodePath("PanelContainer/VBoxContainer/VBoxContainer/MarginContainer/text")
+customer_typing = NodePath("PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer2/customer")
+arrow_box = NodePath("PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox")
+typing_text = NodePath("PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/typing_text")
+left = SubResource("AtlasTexture_wb7ou")
+right = SubResource("AtlasTexture_hjnws")
+up = SubResource("AtlasTexture_qy6vx")
+down = SubResource("AtlasTexture_jtamq")
 metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=231574148]
@@ -20,3 +68,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1935973672]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=632152987]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rq5xq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=425534245]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/VBoxContainer" unique_id=75513275]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+
+[node name="text" type="RichTextLabel" parent="PanelContainer/VBoxContainer/VBoxContainer/MarginContainer" unique_id=492033486]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+bbcode_enabled = true
+scroll_following = true
+scroll_following_visible_characters = true
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/VBoxContainer" unique_id=1964533444]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ng01d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer" unique_id=967803050]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=964209553]
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="customer" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer2" unique_id=1541433877]
+visible = false
+custom_minimum_size = Vector2(0, 13)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "potential customer is typing..."
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=402146353]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer" unique_id=1345500948]
+layout_mode = 2
+
+[node name="typing_text" type="RichTextLabel" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1025369366]
+custom_minimum_size = Vector2(0, 16)
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 12
+theme_override_font_sizes/italics_font_size = 12
+theme_override_font_sizes/mono_font_size = 12
+theme_override_styles/normal = ExtResource("2_mpfgp")
+theme_override_styles/focus = ExtResource("2_mpfgp")
+text = "hello there are 32 different cats in this hall hall hall hall halljwiadoiwaj oidjwqoidhjoia wjoidjwaoi joidwaj oidjwaoijdoiwaj odjw"
+scroll_active = false
+scroll_following_visible_characters = true
+autowrap_mode = 1
+
+[node name="arrowbox" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1186200942]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+theme_override_constants/separation = 8
+
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox" unique_id=593719974]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dqs1r")
