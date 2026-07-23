@@ -29,7 +29,7 @@ func start_day() -> void:
 	%shutdownprompt.close()
 
 func set_time_label() -> void:
-	%time.text = "Day %s | %s" % [GameManager.day, GameManager.get_string_time()]
+	%time.text = "Day %s | Up next: %s | %s" % [GameManager.day, "Nothing" if GameManager.has_work_ended() else "Work until %s" % GameManager.int_to_time(GameManager.work_end_time),GameManager.get_string_time()]
 
 func create_window(id:int,scene:PackedScene) -> PCWindow:
 	if id in active_windows:

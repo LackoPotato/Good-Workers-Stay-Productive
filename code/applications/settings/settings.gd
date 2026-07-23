@@ -42,4 +42,7 @@ func on_reset_game_settings_pressed() -> void:
 
 
 func _on_restart_pressed() -> void:
+	GameManager.set_script(null)
+	GameManager.set_script(preload("res://code/managers/game_manager.gd"))
+	GameManager._ready() #Forgive me Terry, for I have sinned
 	get_tree().reload_current_scene()

@@ -12,7 +12,7 @@ func update_rankings() -> void:
 	fireplace.text = fire_template % GameManager.productivity_place_quota
 	GameManager.workers.sort_custom(sort)
 	var place:int = GameManager.workers.find(GameManager.you)+1
-	yourplace_label.text = yourplace_template % [place,int(GameManager.you.productivity)]
+	yourplace_label.text = yourplace_template % [GameManager.int_to_place(place),int(GameManager.you.productivity)]
 	var text:String = ""
 	for i in range(min(len(GameManager.workers),10)):
 		var worker := GameManager.workers[i]

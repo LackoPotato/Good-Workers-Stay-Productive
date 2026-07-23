@@ -95,11 +95,13 @@ class Worker:
 func get_time_ratio() -> float:
 	return float(work_end_time-work_start_time)/max_time
 
-func get_string_time() -> String:
-	var irlseconds:float = get_time_ratio() * time + work_start_time
-	var minutes:int = int(irlseconds/60) % 60
-	var hours:int = int(irlseconds/3600)
+func int_to_time(t:int) -> String:
+	var minutes:int = int(t/60) % 60
+	var hours:int = int(t/3600)
 	return "%d:%02d" % [hours,minutes]
+
+func get_string_time() -> String:
+	return int_to_time(get_time_ratio() * time + work_start_time)
 
 var tasks:Array[Task]:
 	set(t):
@@ -153,3 +155,19 @@ func new_day() -> void:
 		worker.productivity = 0
 	tasks_finished = 0
 	day += 1
+
+func int_to_place(i:int) -> String:
+	if i >= 10 and str(i)[-2] == "1":
+		return "%sth" % i
+	match i % 10:
+		1:
+			return "%sst" % i
+		2:
+			return "%snd" % i
+		3:
+			return "%srd" % i
+		_:
+			return "%sth" % i
+
+func has_work_ended() -> bool:
+	return time >= max_time
