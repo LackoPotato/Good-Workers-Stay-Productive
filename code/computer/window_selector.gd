@@ -31,5 +31,6 @@ func deselect() -> void:
 		tween.tween_property(self,"offset_transform_scale",normal_scale,0.1)
 		active = true
 
+@warning_ignore("shadowed_variable_base_class")
 func update_text(text:String) -> void:
 	self.text = text

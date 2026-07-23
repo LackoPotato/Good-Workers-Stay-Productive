@@ -41,6 +41,5 @@ func update() -> void:
 	for i in len(tasks_root.get_children()):
 		var task:Task = GameManager.tasks[i]
 		var tbar:Control = tasks_root.get_children()[i]
-		var tween:Tween = task_tweens[i]
 		tbar.get_node("%task").set("text",task.get_task_string())
 		tbar.get_node("%progress").set("text",task.get_progress_string())

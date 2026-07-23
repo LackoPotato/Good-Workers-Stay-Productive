@@ -70,6 +70,7 @@ theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
 text = "just"
 fit_content = true
-scroll_active = false
+scroll_following = true
+scroll_following_visible_characters = true
 
 [connection signal="text_changed" from="PanelContainer/editor" to="PanelContainer" method="_on_editor_text_changed"]

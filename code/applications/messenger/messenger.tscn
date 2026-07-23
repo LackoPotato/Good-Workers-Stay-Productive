@@ -86,7 +86,7 @@ size_flags_vertical = 3
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/VBoxContainer" unique_id=75513275]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 5
 
 [node name="text" type="RichTextLabel" parent="PanelContainer/VBoxContainer/VBoxContainer/MarginContainer" unique_id=492033486]
 layout_mode = 2
@@ -97,6 +97,10 @@ theme_override_font_sizes/bold_italics_font_size = 12
 theme_override_font_sizes/italics_font_size = 12
 theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
+text = "[b]You:[/b]
+	%s
+Customer:
+	what do you want want want want want want want want want want"
 scroll_following = true
 scroll_following_visible_characters = true
 

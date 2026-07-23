@@ -24,6 +24,7 @@ enum POSITION{
 }
 var pcwindowtween:Tween
 var size_before_animation:Vector2i
+@warning_ignore("integer_division")
 @onready var position_before_animation:Vector2i = (get_tree().root.content_scale_size/2)-size/2
 func _init() -> void:
 	add_theme_constant_override("resize_margin",8)

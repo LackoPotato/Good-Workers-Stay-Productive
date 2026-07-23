@@ -2,8 +2,9 @@ extends PCWindow
 @export var sent_text:RichTextLabel
 @export var customer_typing:Label
 @export var customer_typing_template:String = "potential customer is typing%s"
-@export var messenger_template:String = "You:\n[p]%s[/p]\n"
-@export var receiver_template:String = "Customer:\n[p]%s[/p]\n"
+@export var messenger_template:String = "[b]You[/b]:\n\t%s\n"
+@export var receiver_template:String = "[b]Customer[/b]:\n\t%s\n"
+@export var chat_closed_text:String = "[hr width=100%]\nthis chat has been closed"
 @export var arrow_box:HBoxContainer
 @export var typing_text:RichTextLabel
 @export var left:Texture
@@ -45,6 +46,7 @@ func new_sequence() -> void:
 	show_sequence(current_sequence)
 	sequence_length = len(current_sequence)
 	typing_text.visible_ratio = 0
+	typing_text.show()
 	typing_text.text = current_chat[0]
 
 func write_message(direction:ARROW) -> void:
@@ -74,7 +76,10 @@ func finish_message() -> void:
 	if current_chat:
 		tween.tween_callback(new_sequence)
 	else:
-		tween.tween_interval(3)
+		tween.tween_interval(1)
+		tween.tween_callback(sent_text.append_text.bind(chat_closed_text))
+		tween.tween_callback(typing_text.hide)
+		tween.tween_interval(1)
 		tween.tween_callback(begin_chat)
 
 
@@ -85,18 +90,16 @@ func shake(control:Control,intensity:float,time:float) -> void:
 	tween.tween_property(control,"offset_transform_position",Vector2(0,0),time/3)
 	
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.pressed and current_sequence:
-			match event.keycode:
-				4194320: #up
-					write_message(ARROW.UP)
-				4194322: #down
-					write_message(ARROW.DOWN)
-				4194319: #left
-					write_message(ARROW.LEFT)
-				4194321: #right
-					write_message(ARROW.RIGHT)
+func _physics_process(_delta: float) -> void:
+	if current_sequence:
+		if Input.is_action_just_pressed("up"):
+			write_message(ARROW.UP)
+		elif Input.is_action_just_pressed("down"):
+			write_message(ARROW.DOWN)
+		elif Input.is_action_just_pressed("left"):
+			write_message(ARROW.LEFT)
+		elif Input.is_action_just_pressed("right"):
+			write_message(ARROW.RIGHT)
 
 func show_sequence(sequence:Array) -> void:
 	for child in arrow_box.get_children():
