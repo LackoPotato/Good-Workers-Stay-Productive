@@ -4,17 +4,28 @@ extends Control
 @export var gametimer:Timer
 var active_windows:Dictionary[int,PCWindow]
 @export var window_scenes:Dictionary[int,PackedScene]
-
+@export var active_apps_per_day:Array[Button]
+@export var alert_sound:AudioStream
 func _ready() -> void:
 	GameManager.update_background.connect(change_background)
 	change_background(GameManager.background)
-	start_day()
+
+func restart() -> void:
+	for id in active_windows:
+		active_windows[id].queue_free()
 
 func start_day() -> void:
+	restart()
 	gametimer.start()
 	GameManager.time = 0
 	GameManager.start()
-	%time.text = GameManager.get_string_time()
+	set_time_label()
+	for i in min(0,max(GameManager.day,len(active_apps_per_day))):
+		active_apps_per_day[i].show()
+	%shutdownprompt.close()
+
+func set_time_label() -> void:
+	%time.text = "Day %s | %s" % [GameManager.day, GameManager.get_string_time()]
 
 func create_window(id:int,scene:PackedScene) -> PCWindow:
 	if id in active_windows:
@@ -62,18 +73,21 @@ func change_background(texture:Texture) -> void:
 func on_power_pressed() -> void:
 	%shutdownprompt.open()
 	%shutdownprompt.size = Vector2i(350,100)
-	
+	%audio.stream = alert_sound
+	%audio.play()
 
 
 var shutdown_tick_seconds:float = 0.5
 var shutdown_tick_count:int = 8
 func shutdown() -> void:
 	print("shutdown")
-	%pc.hide()
+	transition(%pc,%shutdown)
 	var tween:Tween = get_tree().create_tween()
 	for i in shutdown_tick_count:
 		tween.tween_callback(%shutdown.tick)
 		tween.tween_interval(shutdown_tick_seconds)
+	tween.tween_callback(%results.show_results)
+	tween.tween_callback(gametimer.stop)
 
 func set_snap(window:PCWindow) -> void:
 	self.apply_snap_window = window
@@ -103,4 +117,34 @@ func _input(event: InputEvent) -> void:
 
 func _on_gametimer_timeout() -> void:
 	GameManager.tick()
-	%time.text = GameManager.get_string_time()
+	set_time_label()
+
+
+func _on_results_next() -> void:
+	transition(%shutdown,%turnon,1)
+
+
+
+func _on_turnon_start() -> void:
+	transition(%turnon,%pc)
+	restart()
+	start_day()
+	gametimer.start()
+
+func transition(from:Control,to:Control,wait_time:float = 0) -> void:
+	%shutdown.hide()
+	%pc.hide()
+	%results.hide()
+	%turnon.hide()
+	%transition_panel_top.show()
+	%transition_panel_top.modulate.a = 0
+	from.show()
+	to.hide()
+	
+	var tween:Tween = get_tree().create_tween()
+	tween.tween_property(%transition_panel_top,"modulate:a",1,0.5)
+	tween.tween_callback(from.hide)
+	tween.tween_interval(wait_time)
+	tween.tween_callback(to.show)
+	tween.tween_property(%transition_panel_top,"modulate:a",0,0.5)
+	tween.tween_callback(%transition_panel_top.hide)

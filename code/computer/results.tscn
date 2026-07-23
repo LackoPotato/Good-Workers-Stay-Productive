@@ -1,0 +1,175 @@
+[gd_scene format=3 uid="uid://c8p68yybc3i1c"]
+
+[ext_resource type="Script" uid="uid://b1x1f5gry27hu" path="res://code/computer/results.gd" id="1_b2277"]
+[ext_resource type="Texture2D" uid="uid://dkbcuh221ux4b" path="res://resources/textures/results/background_star.png" id="1_d1g5e"]
+[ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="2_b2277"]
+[ext_resource type="AudioStream" uid="uid://cx0be5vn1ul85" path="res://resources/sounds/drum.mp3" id="3_5k4fv"]
+[ext_resource type="PackedScene" uid="uid://0rwaew2vuxjx" path="res://code/applications/checklist/task.tscn" id="3_b1swp"]
+[ext_resource type="Texture2D" uid="uid://c0nbocrwitanu" path="res://resources/textures/results/grades.png" id="4_5k4fv"]
+[ext_resource type="AudioStream" uid="uid://xp7mjd3aio8v" path="res://resources/sounds/applause.mp3" id="4_hxck8"]
+[ext_resource type="Texture2D" uid="uid://cfsq3srexjhtg" path="res://resources/textures/results/next.png" id="5_hxck8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng01d"]
+atlas = ExtResource("4_5k4fv")
+region = Rect2(-96, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rq5xq"]
+texture = ExtResource("1_d1g5e")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+expand_margin_bottom = 50.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rq5xq"]
+bg_color = Color(0.405878, 0.35143664, 0.720549, 1)
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_fbbxg"]
+script = ExtResource("2_b2277")
+metadata/_custom_type_script = "uid://dix8ymsrpd2uj"
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_oaw7r"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[node name="Control" type="Control" unique_id=909223353 node_paths=PackedStringArray("day", "tasks_finished", "productivity", "place", "message", "rankimg", "audio")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -600)
+script = ExtResource("1_b2277")
+texture = SubResource("AtlasTexture_ng01d")
+day = NodePath("PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/day")
+tasks_finished = NodePath("PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/tasks_finished")
+productivity = NodePath("PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/productivity")
+place = NodePath("PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/place")
+message = NodePath("PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Message")
+rankimg = NodePath("PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/rankimg")
+drumroll = ExtResource("3_5k4fv")
+applause = ExtResource("4_hxck8")
+audio = NodePath("audio")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=379863606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_rq5xq")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=755410704]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/CenterContainer" unique_id=706521989]
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rq5xq")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer/PanelContainer" unique_id=327791064]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer" unique_id=757404071]
+layout_mode = 2
+
+[node name="day" type="RichTextLabel" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2064079023]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Day [scroll size=32 time=0.5]02"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_fbbxg")]
+
+[node name="tasks_finished" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1355490432 instance=ExtResource("3_b1swp")]
+layout_mode = 2
+
+[node name="task" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/tasks_finished" index="0" unique_id=1013498557]
+text = "Tasks Finished"
+
+[node name="productivity" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1691100085 instance=ExtResource("3_b1swp")]
+layout_mode = 2
+
+[node name="task" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/productivity" index="0" unique_id=1013498557]
+text = "Productivity"
+
+[node name="place" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1047855259 instance=ExtResource("3_b1swp")]
+layout_mode = 2
+
+[node name="task" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/place" index="0" unique_id=1013498557]
+text = "Position"
+
+[node name="progress" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/place" index="1" unique_id=1522870181]
+text = "0/32"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1028729832]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxLine_oaw7r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=305259312]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=801898155]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=664143118]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Rank:"
+
+[node name="Message" type="Label" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1559504383]
+visible = false
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 24
+text = "Better luck next time"
+autowrap_mode = 3
+
+[node name="rankimg" type="TextureRect" parent="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=275408891]
+layout_mode = 2
+texture = SubResource("AtlasTexture_ng01d")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=658888115]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Button" type="Button" parent="MarginContainer" unique_id=562114359]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+icon = ExtResource("5_hxck8")
+flat = true
+expand_icon = true
+
+[node name="audio" type="AudioStreamPlayer" parent="." unique_id=1991641492]
+bus = &"Sound"
+
+[connection signal="pressed" from="MarginContainer/Button" to="." method="on_next_pressed"]
+
+[editable path="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/tasks_finished"]
+[editable path="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/productivity"]
+[editable path="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/place"]

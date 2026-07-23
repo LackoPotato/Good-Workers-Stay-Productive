@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://clud3jgqj0pg1" path="res://code/computer/shutdownprompt.tscn" id="5_mfavi"]
 [ext_resource type="Texture2D" uid="uid://d0nnvt67h10j3" path="res://resources/textures/desktop/apps.png" id="6_l37ko"]
 [ext_resource type="PackedScene" uid="uid://hj5opt22u0at" path="res://code/applications/messenger/messenger.tscn" id="6_ttuhk"]
+[ext_resource type="PackedScene" uid="uid://cc0a55gka446w" path="res://code/computer/turnon.tscn" id="7_6h2xv"]
+[ext_resource type="AudioStream" uid="uid://dkbs1i5wltnip" path="res://resources/sounds/chime.mp3" id="7_oaw7r"]
+[ext_resource type="PackedScene" uid="uid://c8p68yybc3i1c" path="res://code/computer/results.tscn" id="12_4axc7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xy2n0"]
 load_path = "res://.godot/imported/apps.png-b56f9e0cd61ff647be7a631c09ec4661.ctex"
@@ -33,7 +36,7 @@ region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rrgb7"]
 atlas = ExtResource("6_l37ko")
-region = Rect2(64, 64, 64, 64)
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
 bg_color = Color(0.03137255, 0.03137255, 0.03137255, 0.49803922)
@@ -45,7 +48,11 @@ corner_radius_bottom_left = 20
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy2n0"]
 bg_color = Color(0.6236486, 0.33638436, 0.61486095, 1)
 
-[node name="Control" type="Control" unique_id=2083592552 node_paths=PackedStringArray("windowroot", "windowselectorroot", "gametimer")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng01d"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" unique_id=2083592552 node_paths=PackedStringArray("windowroot", "windowselectorroot", "gametimer", "active_apps_per_day")]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,11 +70,18 @@ window_scenes = Dictionary[int, PackedScene]({
 3: ExtResource("5_j3oem"),
 4: ExtResource("6_ttuhk")
 })
+active_apps_per_day = [NodePath("pc/SubViewportContainer/windowroot/text"), NodePath("pc/SubViewportContainer/windowroot/messages")]
+alert_sound = ExtResource("7_oaw7r")
 
 [node name="gametimer" type="Timer" parent="." unique_id=602252142]
 
+[node name="turnon" parent="." unique_id=1360060978 instance=ExtResource("7_6h2xv")]
+unique_name_in_owner = true
+layout_mode = 1
+
 [node name="shutdown" parent="." unique_id=292845353 instance=ExtResource("4_cvdxb")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 
 [node name="pc" type="VBoxContainer" parent="." unique_id=956624689]
@@ -110,8 +124,9 @@ expand_mode = 2
 
 [node name="settings" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1393472144]
 offset_left = 72.0
+offset_top = 72.0
 offset_right = 144.0
-offset_bottom = 72.0
+offset_bottom = 144.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 icon = SubResource("AtlasTexture_fbbxg")
@@ -127,7 +142,8 @@ icon = SubResource("AtlasTexture_xy2n0")
 flat = true
 
 [node name="text" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=754117769]
-offset_right = 72.0
+offset_left = 72.0
+offset_right = 144.0
 offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
@@ -135,8 +151,7 @@ icon = SubResource("AtlasTexture_vj4ls")
 flat = true
 
 [node name="checklist" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1894593399]
-offset_left = 216.0
-offset_right = 288.0
+offset_right = 72.0
 offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
@@ -144,9 +159,21 @@ icon = SubResource("AtlasTexture_mnc83")
 flat = true
 
 [node name="messages" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1829762544]
+unique_name_in_owner = true
+visible = false
 offset_left = 288.0
 offset_right = 360.0
 offset_bottom = 72.0
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
+icon = SubResource("AtlasTexture_rrgb7")
+flat = true
+
+[node name="readme" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=86859850]
+unique_name_in_owner = true
+offset_top = 72.0
+offset_right = 72.0
+offset_bottom = 144.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 icon = SubResource("AtlasTexture_rrgb7")
@@ -242,15 +269,38 @@ theme_override_constants/margin_right = 10
 [node name="time" type="Label" parent="pc/taskmanager/HBoxContainer/HBoxContainer/MarginContainer" unique_id=1649499009]
 unique_name_in_owner = true
 layout_mode = 2
-text = "12:42"
+text = "Day: 1 || 12:42"
+
+[node name="transition_panel_top" type="Panel" parent="." unique_id=1000274068]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ng01d")
+
+[node name="results" parent="." unique_id=909223353 instance=ExtResource("12_4axc7")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="audio" type="AudioStreamPlayer" parent="." unique_id=538796138]
+unique_name_in_owner = true
+bus = &"Sound"
 
 [connection signal="timeout" from="gametimer" to="." method="_on_gametimer_timeout"]
+[connection signal="start" from="turnon" to="." method="_on_turnon_start"]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/settings" to="." method="app_icon_pressed" binds= [2]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/search" to="." method="app_icon_pressed" binds= [1]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/text" to="." method="app_icon_pressed" binds= [0]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/checklist" to="." method="app_icon_pressed" binds= [3]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/messages" to="." method="app_icon_pressed" binds= [4]]
+[connection signal="pressed" from="pc/SubViewportContainer/windowroot/readme" to="." method="app_icon_pressed" binds= [4]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/shutdownprompt/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/yes" to="." method="shutdown"]
 [connection signal="pressed" from="pc/taskmanager/HBoxContainer/Button" to="." method="on_power_pressed"]
+[connection signal="next" from="results" to="." method="_on_results_next"]
 
 [editable path="pc/SubViewportContainer/windowroot/shutdownprompt"]

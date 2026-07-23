@@ -1,13 +1,21 @@
 extends PCWindow
 @onready var pages:Dictionary[String,Node] = {
-	"http://mmm.officetracker.com/leaderboard":%office,
+	"http://mmm.sunshine.com/leaderboard":%office,
+	"mmm.sunshine.com/leaderboard":%office,
 	"http://mmm.stopkillinggames.com":%skg,
-	"http://www.stopkillinggames.com":%skg
+	"mmm.stopkillinggames.com":%skg,
+	"http://www.stopkillinggames.com":%skg,
+	"www.stopkillinggames.com":%skg,
+	"http://mmm.sunshine.com/blog":%sunshine_blog,
+	"mmm.sunshine.com/blog":%sunshine_blog,
 }
 var forbidden_pages:Array[String] = [
 	"http://mmm.youtube.com",
+	"mmm.youtube.com",
 	"http://mmm.itch.io",
-	"http://mmm.geocities.com"
+	"mmm.itch.io",
+	"http://mmm.geocities.com",
+	"mmm.geocities.com",
 ]
 
 @export var page_root:ScrollContainer

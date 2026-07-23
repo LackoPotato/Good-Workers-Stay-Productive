@@ -20,8 +20,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[scroll time=0.2]87[/scroll]/32"
+text = "[scroll max_time=1]0 [/scroll]/32"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+horizontal_alignment = 2
 custom_effects = [SubResource("RichTextEffect_136h1")]

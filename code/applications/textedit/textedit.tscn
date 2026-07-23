@@ -61,6 +61,7 @@ fit_content = true
 [node name="document" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=802837176]
 texture_filter = 1
 layout_mode = 2
+size_flags_vertical = 3
 offset_transform_enabled = true
 theme_override_font_sizes/normal_font_size = 12
 theme_override_font_sizes/bold_font_size = 12
@@ -69,8 +70,6 @@ theme_override_font_sizes/italics_font_size = 12
 theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
 text = "just"
-fit_content = true
 scroll_following = true
-scroll_following_visible_characters = true
 
 [connection signal="text_changed" from="PanelContainer/editor" to="PanelContainer" method="_on_editor_text_changed"]

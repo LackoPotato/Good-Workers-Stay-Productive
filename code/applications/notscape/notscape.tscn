@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dtkgmo4wi1os3" path="res://code/applications/browser/blocked.tscn" id="7_jv5lw"]
 [ext_resource type="PackedScene" uid="uid://omal3yas3pkd" path="res://code/applications/browser/skg.tscn" id="8_0550l"]
 [ext_resource type="PackedScene" uid="uid://cvah1uvd3er57" path="res://code/applications/browser/notfound.tscn" id="9_8ersy"]
+[ext_resource type="PackedScene" uid="uid://dc7tivhwyki55" path="res://code/applications/browser/sunshine_blog/sunshine_blog.tscn" id="10_22fdi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w684a"]
 bg_color = Color(0.5801771, 0.61984015, 0.61229026, 1)
@@ -125,14 +126,24 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=862993999]
+[node name="announcements" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=1974185868]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxLine_fbbxg")
 theme_override_styles/pressed = SubResource("StyleBoxLine_fbbxg")
 theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
-text = "office"
+text = "announcements"
+flat = true
+
+[node name="leader" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=862993999]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxLine_fbbxg")
+theme_override_styles/pressed = SubResource("StyleBoxLine_fbbxg")
+theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
+text = "leaderboard"
 flat = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=485986377]
@@ -165,6 +176,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="sunshine_blog" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1134900195 instance=ExtResource("10_22fdi")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
 [connection signal="pressed" from="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer2/refresh" to="." method="_on_refresh_pressed"]
 [connection signal="text_submitted" from="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer/LineEdit" to="." method="_on_search_submitted"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer/Button" to="." method="load_page" binds= ["http://mmm.officetracker.com/leaderboard"]]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer/announcements" to="." method="load_page" binds= ["http://mmm.sunshine.com/blog"]]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer/leader" to="." method="load_page" binds= ["http://mmm.sunshine.com/leaderboard"]]

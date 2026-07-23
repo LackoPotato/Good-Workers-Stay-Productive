@@ -1,12 +1,10 @@
 [gd_scene format=3 uid="uid://jpc5m6gyhjh0"]
 
+[ext_resource type="StyleBox" uid="uid://44v6v51474d7" path="res://resources/sunshineblue.tres" id="1_ilroo"]
 [ext_resource type="Script" uid="uid://bd5g3t7p16gbs" path="res://code/applications/browser/office/office.gd" id="1_ohufy"]
 [ext_resource type="Texture2D" uid="uid://d1celmf7dxxll" path="res://resources/textures/browser/leaderboard.png" id="1_yxf07"]
 [ext_resource type="Texture2D" uid="uid://bwhr7oiatilth" path="res://resources/textures/browser/face.png" id="2_4k4nd"]
 [ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="3_1wjbi"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
-bg_color = Color(0.38497776, 0.6479915, 0.6992921, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_glxhp"]
 
@@ -26,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
+theme_override_styles/panel = ExtResource("1_ilroo")
 script = ExtResource("1_ohufy")
 leaderboard = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/leaderboard")
 yourplace_label = NodePath("MarginContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/place")

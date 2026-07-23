@@ -30,6 +30,9 @@ func update_time_label() -> void:
 
 func _on_opened() -> void:
 	%timescale.value = GameManager.max_time
+	%master.value = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Master"))
+	%music.value = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Music"))
+	%sound.value = AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Sound"))
 	update_time_label()
 
 

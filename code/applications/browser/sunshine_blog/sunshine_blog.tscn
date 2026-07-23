@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dc7tivhwyki55"]
+
+[ext_resource type="StyleBox" uid="uid://44v6v51474d7" path="res://resources/sunshineblue.tres" id="1_1eyvp"]
+[ext_resource type="Script" uid="uid://bmllvo5500y1s" path="res://code/applications/browser/sunshine_blog/sunshine_blog.gd" id="2_gg3d0"]
+[ext_resource type="StyleBox" uid="uid://bgte2svwfvkxj" path="res://resources/blog_entry.tres" id="2_t87oe"]
+
+[node name="sunshine_blog" type="PanelContainer" unique_id=1134900195 node_paths=PackedStringArray("blog_root")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_1eyvp")
+script = ExtResource("2_gg3d0")
+blog_root = NodePath("HBoxContainer/MarginContainer/VBoxContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=225227050]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer" unique_id=1561481687]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer" unique_id=868873246]
+custom_minimum_size = Vector2(220, 0)
+custom_maximum_size = Vector2(220, -1)
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=110333913]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_t87oe")
+theme_override_styles/focus = ExtResource("2_t87oe")
+text = "Day 0
+washwadshdwahsdhawsdhwas
+wadshdwahsd
+wahdshwa
+wahsdw"
+
+[node name="Label3" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1038176307]
+custom_minimum_size = Vector2(180, 0)
+custom_maximum_size = Vector2(180, -1)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_t87oe")
+theme_override_styles/focus = ExtResource("2_t87oe")
+text = "Day 0
+washwadshdwahsdhawwddwadsdhwas there once was a ship that 
+wadshdwahsd
+wahdshwa
+wahsdw"
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="HBoxContainer/MarginContainer/VBoxContainer" unique_id=1707819976]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = ExtResource("2_t87oe")
+theme_override_styles/focus = ExtResource("2_t87oe")
+text = "Day 0
+washwadshdwahsdhawsdhwas
+wadshdwahsd
+wahdshwa
+wahsdw"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

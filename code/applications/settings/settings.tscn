@@ -73,21 +73,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Master" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=1992915728]
+[node name="master" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=1992915728]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 2.0
 step = 0.1
 value = 1.0
 
-[node name="Music" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=1135103041]
+[node name="music" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=1135103041]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 2.0
 step = 0.1
 value = 1.0
 
-[node name="Sound" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=2014053341]
+[node name="sound" type="HSlider" parent="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders" unique_id=2014053341]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 2.0
@@ -248,9 +251,9 @@ layout_mode = 2
 text = "Restart Game"
 
 [connection signal="opened" from="." to="." method="_on_opened"]
-[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Master" to="." method="_on_master_value_changed"]
-[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Music" to="." method="_on_music_value_changed"]
-[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/Sound" to="." method="_on_sound_value_changed"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/sound/Sliders/sound" to="." method="_on_sound_value_changed"]
 [connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/city" to="." method="set_background"]
 [connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/flowers" to="." method="set_background"]
 [connection signal="choose" from="PanelContainer/TabContainer/Desktop/VBoxContainer3/VBoxContainer2/background/VBoxContainer/HBoxContainer/GridContainer/horse" to="." method="set_background"]

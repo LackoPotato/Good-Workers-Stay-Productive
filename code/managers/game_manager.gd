@@ -1,5 +1,5 @@
 extends Node
-var day:int = 1
+var day:int = 0
 var time:int = 0
 var default_max_time:int = 200
 var max_time:int = 200
@@ -11,6 +11,9 @@ var productivity_place_quota:int = 80
 var written_words:int = 0
 var workers:Array[Worker]
 var worker_potential_names:PackedStringArray
+
+func reset() -> void:
+	get_tree().reload_current_scene()
 
 var productivity_scale:float = 1
 var background:Texture = preload("res://resources/textures/backgrounds/orangesky.JPG"):
@@ -42,15 +45,18 @@ func initialise_workers() -> void:
 	you = Worker.new("You",0,0,0,0,0,[0,0,0,0,0,0,0])
 	workers.append(you)
 	for i in initial_worker_count:
+		var l:float = max(0.2,log(i/2))
 		workers.append(Worker.new(
 			worker_potential_names[randi_range(0,len(worker_potential_names)-1)],
-			0,
-			-0.2,
-			0.3,
-			-0.2,
-			0.2
+			l+get_random_variance(),
+			-(1/2)*l+get_random_variance(),
+			+(1/2)*l+get_random_variance(),
+			-(1/4)*l+get_random_variance(),
+			+(1/4)*l+get_random_variance()
 		))
 
+func get_random_variance() -> float:
+	return randf_range(-0.1,0.3)
 
 func tick() -> void:
 	time += 1
@@ -101,6 +107,8 @@ var tasks:Array[Task]:
 var max_tasks:int = 3
 @warning_ignore("int_as_enum_without_cast")
 var unlocked_tasks:Array[Task.ValidTasks] = [0,1]
+var posted_blogs:Array[String]
+var tasks_finished:int = 0
 signal tasks_updated()
 signal task_finished(index:int)
 
@@ -108,6 +116,7 @@ func on_task_finished(index:int):
 	add_productivity(tasks[index].get_rewarded_productivity())
 	tasks.remove_at(index)
 	tasks.append(get_random_task())
+	tasks_finished += 1
 
 func generate_tasks() -> void:
 	tasks.clear()
@@ -125,3 +134,14 @@ func update_tasks(type:Task.ValidTasks,progress:int) -> void:
 				task_finished.emit(i)
 			tasks_updated.emit()
 			break
+
+func has_passed() -> bool:
+	print(workers.find(you),productivity_place_quota)
+	return workers.find(you) <= productivity_place_quota
+
+func new_day() -> void:
+	time = 0
+	for worker in workers:
+		worker.productivity = 0
+	tasks_finished = 0
+	day += 1

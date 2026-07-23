@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://cc0a55gka446w"]
+
+[ext_resource type="StyleBox" uid="uid://44v6v51474d7" path="res://resources/sunshineblue.tres" id="1_7bauf"]
+[ext_resource type="Script" uid="uid://ch8a36k7u804c" path="res://code/computer/turnon.gd" id="2_eildo"]
+[ext_resource type="Texture2D" uid="uid://dtmw54owfr5r1" path="res://resources/textures/osimg.png" id="3_j0gf7"]
+[ext_resource type="Texture2D" uid="uid://yqxf81gem322" path="res://resources/textures/profile.JPG" id="4_1k2jl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
+bg_color = Color(0.2929662, 0.44812107, 0.63823557, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fbbxg"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+vertical = true
+
+[node name="turnon" type="PanelContainer" unique_id=1360060978]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_7bauf")
+script = ExtResource("2_eildo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2020838448]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=474383593]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer" unique_id=1888629572]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer" unique_id=2013793115]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/CenterContainer/HBoxContainer" unique_id=1306404632]
+layout_mode = 2
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer/MarginContainer" unique_id=71314061]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1846240477]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=502679194]
+layout_mode = 2
+texture = ExtResource("3_j0gf7")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=483933111]
+layout_mode = 2
+text = "to begin, click your user name"
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/CenterContainer/HBoxContainer" unique_id=1430610228]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_fbbxg")
+
+[node name="login" type="MarginContainer" parent="VBoxContainer/CenterContainer/HBoxContainer" unique_id=920158743]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer/login" unique_id=1556150112]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer/login/VBoxContainer" unique_id=1850256697]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer/login/VBoxContainer/HBoxContainer" unique_id=1519531364]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer/HBoxContainer/login/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=90318097]
+custom_maximum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("4_1k2jl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer/HBoxContainer/login/VBoxContainer/HBoxContainer" unique_id=899831967]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="Label" parent="VBoxContainer/CenterContainer/HBoxContainer/login/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1429880031]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Good Workers,
+Stay Productive"
+
+[node name="Label2" type="Label" parent="VBoxContainer/CenterContainer/HBoxContainer/login/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1494501878]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "logged on"
+
+[node name="Panel2" type="Panel" parent="VBoxContainer" unique_id=53054995]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fbbxg")
+
+[connection signal="gui_input" from="VBoxContainer/CenterContainer/HBoxContainer/login" to="." method="_on_login_gui_input"]
