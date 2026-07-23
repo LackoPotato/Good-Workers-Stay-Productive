@@ -5,7 +5,7 @@ extends PCWindow
 @export var messenger_template:String = "[b]You[/b]:\n\t%s\n"
 @export var receiver_template:String = "[b]Customer[/b]:\n\t%s\n"
 @export var chat_closed_text:String = "[hr width=100%]\nthis chat has been closed"
-@export var arrow_box:HBoxContainer
+@export var arrow_box:HFlowContainer
 @export var typing_text:RichTextLabel
 @export var left:Texture
 @export var right:Texture

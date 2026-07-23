@@ -45,14 +45,15 @@ func initialise_workers() -> void:
 	you = Worker.new("You",0,0,0,0,0,[0,0,0,0,0,0,0])
 	workers.append(you)
 	for i in initial_worker_count:
+		@warning_ignore("integer_division")
 		var l:float = max(0.2,log(i/2))
 		workers.append(Worker.new(
 			worker_potential_names[randi_range(0,len(worker_potential_names)-1)],
 			l+get_random_variance(),
-			-(1/2)*l+get_random_variance(),
-			+(1/2)*l+get_random_variance(),
-			-(1/4)*l+get_random_variance(),
-			+(1/4)*l+get_random_variance()
+			-(1.0/2.0)*l+get_random_variance(),
+			+(1.0/2.0)*l+get_random_variance(),
+			-(1.0/4.0)*l+get_random_variance(),
+			+(1.0/4.0)*l+get_random_variance()
 		))
 
 func get_random_variance() -> float:
@@ -138,6 +139,13 @@ func update_tasks(type:Task.ValidTasks,progress:int) -> void:
 func has_passed() -> bool:
 	print(workers.find(you),productivity_place_quota)
 	return workers.find(you) <= productivity_place_quota
+
+func sort(worker_a:GameManager.Worker,worker_b:GameManager.Worker) -> bool:
+	return worker_a.productivity > worker_b.productivity
+
+func get_place(worker:Worker) -> int:
+	workers.sort_custom(sort)
+	return workers.find(worker)+1
 
 func new_day() -> void:
 	time = 0

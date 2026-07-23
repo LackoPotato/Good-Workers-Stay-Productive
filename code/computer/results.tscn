@@ -168,6 +168,13 @@ expand_icon = true
 [node name="audio" type="AudioStreamPlayer" parent="." unique_id=1991641492]
 bus = &"Sound"
 
+[node name="speed_change" type="Label" parent="." unique_id=1503373760]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 20.0
+text = "%s IGT seconds per second"
+
 [connection signal="pressed" from="MarginContainer/Button" to="." method="on_next_pressed"]
 
 [editable path="PanelContainer/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/tasks_finished"]

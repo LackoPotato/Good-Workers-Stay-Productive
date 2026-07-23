@@ -34,10 +34,12 @@ func get_progress_label(box:HBoxContainer) -> RichTextLabel:
 	return (box.get_node("%progress") as RichTextLabel)
 
 func show_results() -> void:
+	%speed_change.visible = GameManager.default_max_time != GameManager.max_time
+	%speed_change.text = "%s IGT seconds per second" % GameManager.get_time_ratio()
 	clear(tasks_finished)
 	clear(productivity)
 	texture.region.position.x = -image_size
-	var pposition:int = GameManager.workers.find(GameManager.you)+1
+	var pposition:int = GameManager.get_place(GameManager.you)
 	var rank:int
 	audio.stream = drumroll
 	audio.playing = true

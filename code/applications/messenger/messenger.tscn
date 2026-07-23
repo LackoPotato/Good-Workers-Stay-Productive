@@ -1,36 +1,12 @@
 [gd_scene format=3 uid="uid://hj5opt22u0at"]
 
 [ext_resource type="Script" uid="uid://jl2oqydf1lrg" path="res://code/applications/messenger/messenger.gd" id="1_dqs1r"]
+[ext_resource type="Texture2D" uid="uid://cxgr8a1nxkf4v" path="res://resources/messenger/left.tres" id="2_hjnws"]
 [ext_resource type="StyleBox" uid="uid://wcie437jly2x" path="res://resources/window/searchbar.tres" id="2_mpfgp"]
+[ext_resource type="Texture2D" uid="uid://cqk55fhat1u50" path="res://resources/messenger/right.tres" id="3_brulx"]
 [ext_resource type="Texture2D" uid="uid://3pti00nb18pq" path="res://resources/textures/arrows.png" id="3_mpfgp"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mpfgp"]
-load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wb7ou"]
-atlas = SubResource("CompressedTexture2D_mpfgp")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4xk2"]
-load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hjnws"]
-atlas = SubResource("CompressedTexture2D_v4xk2")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_brulx"]
-load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qy6vx"]
-atlas = SubResource("CompressedTexture2D_brulx")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gwn4p"]
-load_path = "res://.godot/imported/arrows.png-0e97982c54e63010ff7e650eed13e292.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jtamq"]
-atlas = SubResource("CompressedTexture2D_gwn4p")
-region = Rect2(32, 0, 32, 32)
+[ext_resource type="Texture2D" uid="uid://t3jgcsgl8eqr" path="res://resources/messenger/up.tres" id="4_qy6vx"]
+[ext_resource type="Texture2D" uid="uid://cq7pg1f2iaho1" path="res://resources/messenger/down.tres" id="5_gwn4p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
 bg_color = Color(0.45448655, 0.6213624, 0.7590235, 1)
@@ -55,10 +31,10 @@ sent_text = NodePath("PanelContainer/VBoxContainer/VBoxContainer/MarginContainer
 customer_typing = NodePath("PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer2/customer")
 arrow_box = NodePath("PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox")
 typing_text = NodePath("PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/typing_text")
-left = SubResource("AtlasTexture_wb7ou")
-right = SubResource("AtlasTexture_hjnws")
-up = SubResource("AtlasTexture_qy6vx")
-down = SubResource("AtlasTexture_jtamq")
+left = ExtResource("2_hjnws")
+right = ExtResource("3_brulx")
+up = ExtResource("4_qy6vx")
+down = ExtResource("5_gwn4p")
 metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=231574148]
@@ -149,12 +125,19 @@ scroll_active = false
 scroll_following_visible_characters = true
 autowrap_mode = 1
 
-[node name="arrowbox" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1186200942]
+[node name="arrowbox" type="HFlowContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1591421086]
 layout_mode = 2
-size_flags_vertical = 3
-offset_transform_enabled = true
-theme_override_constants/separation = 8
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox" unique_id=593719974]
+[node name="arrowbox" type="FlowContainer" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox" unique_id=888783754]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect6" type="TextureRect" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox/arrowbox" unique_id=614396832]
 layout_mode = 2
 texture = SubResource("AtlasTexture_dqs1r")
+stretch_mode = 4
+
+[node name="TextureRect10" type="TextureRect" parent="PanelContainer/VBoxContainer/VBoxContainer/PanelContainer/VBoxContainer/MarginContainer/VBoxContainer/arrowbox/arrowbox" unique_id=15243383]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dqs1r")
+stretch_mode = 4

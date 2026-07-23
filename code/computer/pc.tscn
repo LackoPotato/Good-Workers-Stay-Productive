@@ -12,15 +12,16 @@
 [ext_resource type="Texture2D" uid="uid://d0nnvt67h10j3" path="res://resources/textures/desktop/apps.png" id="6_l37ko"]
 [ext_resource type="PackedScene" uid="uid://hj5opt22u0at" path="res://code/applications/messenger/messenger.tscn" id="6_ttuhk"]
 [ext_resource type="PackedScene" uid="uid://cc0a55gka446w" path="res://code/computer/turnon.tscn" id="7_6h2xv"]
+[ext_resource type="PackedScene" uid="uid://btk73roodlwn5" path="res://code/applications/credits.tscn" id="7_hlc3l"]
 [ext_resource type="AudioStream" uid="uid://dkbs1i5wltnip" path="res://resources/sounds/chime.mp3" id="7_oaw7r"]
 [ext_resource type="PackedScene" uid="uid://c8p68yybc3i1c" path="res://code/computer/results.tscn" id="12_4axc7"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbbxg"]
+atlas = ExtResource("6_l37ko")
+region = Rect2(64, 0, 64, 64)
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xy2n0"]
 load_path = "res://.godot/imported/apps.png-b56f9e0cd61ff647be7a631c09ec4661.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbbxg"]
-atlas = SubResource("CompressedTexture2D_xy2n0")
-region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xy2n0"]
 atlas = SubResource("CompressedTexture2D_xy2n0")
@@ -33,6 +34,10 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mnc83"]
 atlas = ExtResource("6_l37ko")
 region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlc3l"]
+atlas = ExtResource("6_l37ko")
+region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rrgb7"]
 atlas = ExtResource("6_l37ko")
@@ -68,7 +73,8 @@ window_scenes = Dictionary[int, PackedScene]({
 1: ExtResource("3_udd7d"),
 2: ExtResource("4_mnc83"),
 3: ExtResource("5_j3oem"),
-4: ExtResource("6_ttuhk")
+4: ExtResource("6_ttuhk"),
+5: ExtResource("7_hlc3l")
 })
 active_apps_per_day = [NodePath("pc/SubViewportContainer/windowroot/text"), NodePath("pc/SubViewportContainer/windowroot/messages")]
 alert_sound = ExtResource("7_oaw7r")
@@ -86,6 +92,7 @@ layout_mode = 1
 
 [node name="pc" type="VBoxContainer" parent="." unique_id=956624689]
 unique_name_in_owner = true
+visible = false
 texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
@@ -107,8 +114,8 @@ anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
 gui_embed_subwindows = true
 oversampling = false
-size = Vector2i(640, 440)
-render_target_update_mode = 4
+size = Vector2i(2, 2)
+render_target_update_mode = 0
 
 [node name="background" type="TextureRect" parent="pc/SubViewportContainer/windowroot" unique_id=862976209]
 unique_name_in_owner = true
@@ -160,13 +167,12 @@ flat = true
 
 [node name="messages" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=1829762544]
 unique_name_in_owner = true
-visible = false
-offset_left = 288.0
-offset_right = 360.0
+offset_left = 216.0
+offset_right = 288.0
 offset_bottom = 72.0
 theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_hover_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
-icon = SubResource("AtlasTexture_rrgb7")
+icon = SubResource("AtlasTexture_hlc3l")
 flat = true
 
 [node name="readme" type="Button" parent="pc/SubViewportContainer/windowroot" unique_id=86859850]
@@ -298,7 +304,7 @@ bus = &"Sound"
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/text" to="." method="app_icon_pressed" binds= [0]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/checklist" to="." method="app_icon_pressed" binds= [3]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/messages" to="." method="app_icon_pressed" binds= [4]]
-[connection signal="pressed" from="pc/SubViewportContainer/windowroot/readme" to="." method="app_icon_pressed" binds= [4]]
+[connection signal="pressed" from="pc/SubViewportContainer/windowroot/readme" to="." method="app_icon_pressed" binds= [5]]
 [connection signal="pressed" from="pc/SubViewportContainer/windowroot/shutdownprompt/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/yes" to="." method="shutdown"]
 [connection signal="pressed" from="pc/taskmanager/HBoxContainer/Button" to="." method="on_power_pressed"]
 [connection signal="next" from="results" to="." method="_on_results_next"]

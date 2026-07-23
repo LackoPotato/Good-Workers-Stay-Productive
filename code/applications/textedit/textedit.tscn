@@ -48,12 +48,11 @@ theme_override_font_sizes/bold_italics_font_size = 12
 theme_override_font_sizes/italics_font_size = 12
 theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
-text = "[table=9][cell][u]F[/u]ile [/cell][cell][u]E[/u]dit [/cell]
+text = "[table=8][cell][u]F[/u]ile [/cell][cell][u]E[/u]dit [/cell]
 [cell][u]V[/u]iew [/cell]
 [cell][u]I[/u]nsert [/cell]
 [cell][u]F[/u]ormat [/cell]
 [cell][u]T[/u]ools [/cell]
-[cell][u]D[/u]raw [/cell]
 [cell][u]W[/u]indow [/cell]
 [cell][u]H[/u]elp [/cell][table]"
 fit_content = true

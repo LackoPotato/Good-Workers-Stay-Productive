@@ -13,8 +13,12 @@ func _ready() -> void:
 func restart() -> void:
 	for id in active_windows:
 		active_windows[id].queue_free()
+	active_windows.clear()
+	for child in windowselectorroot.get_children():
+		child.queue_free()
 
 func start_day() -> void:
+	GameManager.new_day()
 	restart()
 	gametimer.start()
 	GameManager.time = 0
