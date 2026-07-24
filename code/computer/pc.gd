@@ -16,6 +16,10 @@ var active_windows:Dictionary[int,PCWindow]
 @export var bug_multiple_chance:float = 0.3
 @export var max_bugs:int = 25
 @export var pity_bug_spawn_tick_frequency:int = 45
+
+@export var music_boot:AudioStream
+@export var music_intro:AudioStream
+@export var music_loop:AudioStream
 var bug_chance:float = 0
 
 func _ready() -> void:
@@ -46,10 +50,11 @@ func spawn_bug() -> void:
 		root.add_child(bug)
 
 func work_finished() -> void:
-	if not %shutdownprompt.is_open:
-		%shutdownprompt.get_node("%prompt").text = work_ended_shutdown_prompt
-	show_shutdown_prompt()
-	gametimer.stop()
+	if not skipping_day:
+		if not %shutdownprompt.is_open:
+			%shutdownprompt.get_node("%prompt").text = work_ended_shutdown_prompt
+		show_shutdown_prompt()
+		gametimer.stop()
 
 func restart() -> void:
 	for id in active_windows:
@@ -59,6 +64,7 @@ func restart() -> void:
 		child.queue_free()
 
 func init_day() -> void:
+	
 	ticks_since_last_bug = 1
 	GameManager.new_day()
 	restart()
@@ -66,11 +72,22 @@ func init_day() -> void:
 	GameManager.start()
 	set_time_label()
 	for app in task_apps:
-		app.hide()
+		if app:
+			app.hide()
 	for app in GameManager.unlocked_tasks:
 		if app < len(task_apps):
-			task_apps[app].show()
+			if task_apps[app]:
+				task_apps[app].show()
 	%shutdownprompt.close()
+	%music.volume_db = 0
+	%music.stream = music_boot
+	%music.play()
+	await %music.finished
+	%music.stream = music_intro
+	%music.play()
+	await %music.finished
+	%music.stream = music_loop
+	%music.play()
 
 func set_time_label() -> void:
 	%time.text = "Day %s | Up next: %s | %s" % [GameManager.day, "Nothing" if GameManager.has_work_ended() else "Work until %s" % GameManager.int_to_time(GameManager.work_end_time),GameManager.get_string_time()]
@@ -163,15 +180,18 @@ func show_shutdown_prompt() -> void:
 
 var shutdown_tick_seconds:float = 0.5
 var shutdown_tick_count:int = 8
+var skipping_day:bool = false
 func shutdown() -> void:
 	print("shutdown")
+	skipping_day = false
 	var tween:Tween = get_tree().create_tween()
+	tween.tween_property(%music,"volume_linear",0,0.5)
 	if not GameManager.has_work_ended():
-		for i in range(GameManager.max_time-GameManager.time):
-			GameManager.tick()
+		skipping_day = true
 		%time_passer_label.text = "Passing time until work ends:\n[scroll max_time=1]%s[/scroll]" % GameManager.int_to_time(GameManager.work_end_time)
 		tween.tween_callback(transition.bind(%pc,%time_passer))
 		tween.tween_interval(4)
+		tween.tween_callback(skip_to_end_of_work)
 		tween.tween_callback(transition.bind(%time_passer,%shutdown))
 	else:
 		transition(%pc,%shutdown)
@@ -181,18 +201,21 @@ func shutdown() -> void:
 	tween.tween_callback(%results.show_results)
 	tween.tween_callback(gametimer.stop)
 
+func skip_to_end_of_work() -> void:
+	for i in range(GameManager.max_time-GameManager.time):
+		GameManager.tick()
+
 func _on_results_next() -> void:
 	transition(%shutdown,%turnon,1)
 
 func _on_turnon_start() -> void:
 	%turnon.update_text()
 	transition(%turnon,%pc)
-	if GameManager.has_passed():
-		restart()
-		init_day()
-		gametimer.start()
-	else:
-		dirty_full_reset()
+	if not GameManager.has_passed():
+		GameManager.reset()
+	restart()
+	init_day()
+	gametimer.start()
 
 func transition(from:Control,to:Control,wait_time:float = 0) -> void:
 	%shutdown.hide()
@@ -213,7 +236,3 @@ func transition(from:Control,to:Control,wait_time:float = 0) -> void:
 	tween.tween_property(%transition_panel_top,"modulate:a",0,0.5)
 	tween.tween_callback(%transition_panel_top.hide)
 #endregion
-
-func dirty_full_reset() -> void:
-	GameManager.reset()
-	get_tree().reload_current_scene()

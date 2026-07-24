@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://btk73roodlwn5" path="res://code/applications/readme.tscn" id="7_hlc3l"]
 [ext_resource type="AudioStream" uid="uid://dkbs1i5wltnip" path="res://resources/sounds/chime.mp3" id="7_oaw7r"]
 [ext_resource type="PackedScene" uid="uid://p34tax1f0x7q" path="res://code/bug/bug.tscn" id="9_dtj0n"]
+[ext_resource type="AudioStream" uid="uid://cbefxlvsd8hbc" path="res://resources/music/intro.mp3" id="10_c3lii"]
+[ext_resource type="AudioStream" uid="uid://k307d0ejy0q3" path="res://resources/music/boot.mp3" id="10_eal5s"]
+[ext_resource type="AudioStream" uid="uid://dflat5fe3kyxj" path="res://resources/music/loop.mp3" id="11_eal5s"]
 [ext_resource type="PackedScene" uid="uid://c8p68yybc3i1c" path="res://code/computer/results.tscn" id="12_4axc7"]
 [ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="15_ik8qr"]
 
@@ -103,10 +106,13 @@ window_scenes = Dictionary[int, PackedScene]({
 4: ExtResource("6_ttuhk"),
 5: ExtResource("7_hlc3l")
 })
-task_apps = [NodePath("pc/SubViewportContainer/windowroot/text"), NodePath("pc/SubViewportContainer/windowroot/messages")]
+task_apps = [NodePath("pc/SubViewportContainer/windowroot/text"), null, NodePath("pc/SubViewportContainer/windowroot/messages")]
 alert_sound = ExtResource("7_oaw7r")
 path_root = NodePath("pc/potential_paths")
 bug_scene = ExtResource("9_dtj0n")
+music_boot = ExtResource("10_eal5s")
+music_intro = ExtResource("10_c3lii")
+music_loop = ExtResource("11_eal5s")
 
 [node name="gametimer" type="Timer" parent="." unique_id=602252142]
 
@@ -373,6 +379,10 @@ bus = &"Sound"
 [node name="music" type="AudioStreamPlayer" parent="." unique_id=589703025]
 unique_name_in_owner = true
 bus = &"Music"
+
+[node name="clock" type="AudioStreamPlayer" parent="." unique_id=1051647244]
+unique_name_in_owner = true
+bus = &"Sound"
 
 [connection signal="timeout" from="gametimer" to="." method="_on_gametimer_timeout"]
 [connection signal="start" from="turnon" to="." method="_on_turnon_start"]

@@ -34,9 +34,13 @@ func get_progress_label(box:HBoxContainer) -> RichTextLabel:
 	return (box.get_node("%progress") as RichTextLabel)
 
 func show_results() -> void:
+	audio.volume_db = 0
 	%speed_change.visible = GameManager.default_max_time != GameManager.max_time
 	%speed_change.text = "%s IGT seconds per second" % GameManager.get_time_ratio()
 	%cheat_mode.visible = GameManager.cheated
+	%productivity_scale.visible = GameManager.productivity_scale != 1
+	%productivity_scale.text = "productivity scale changed: 1 -> %s" % GameManager.productivity_scale
+	%productivity_changed.visible = GameManager.productivity_has_been_changed
 	clear(tasks_finished)
 	clear(productivity)
 	texture.region.position.x = -image_size
@@ -46,7 +50,7 @@ func show_results() -> void:
 	audio.playing = true
 	var passed:bool = GameManager.has_passed()
 	if passed:
-		var ratio:float = ((pposition-1)/(len(GameManager.workers)))
+		var ratio:float = ((pposition-1)/float(GameManager.productivity_place_quota))
 		rank = max(1,floori((1-ratio) * 4))
 	else:
 		rank = 0
@@ -103,4 +107,6 @@ func on_next_pressed() -> void:
 	var tween:Tween = get_tree().create_tween().set_ease(Tween.EASE_IN)
 	next.emit()
 	tween.tween_property(self,"offset_transform_position:y",-600,0.5)
+	tween.tween_property(audio,"volume_linear",0,0.5)
 	tween.tween_callback(hide)
+	

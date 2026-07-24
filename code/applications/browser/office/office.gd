@@ -6,9 +6,11 @@ extends PanelContainer
 @export var leaderboard_template:String = "[table=3]%s[/table]"
 @export var leaderboard_place_template:String = "\t[cell]%s[/cell][cell]%s[/cell][cell][scroll time=0.1]%s[/scroll][/cell]"
 @export var fire_template:String = "Bottom %s get removed from their place of employment! Good workers stay productive."
+@export var robot_worker_template:String = "Robot Workers are projected to score %s, all working below this score by the end of the work day are elevated to the prestigious rank of worked"
 @export var player_surrounding_amount:int = 3
 
 func update_rankings() -> void:
+	fireplace.visible = not GameManager.productivity_place_quota >= len(GameManager.workers)
 	fireplace.text = fire_template % GameManager.productivity_place_quota
 	var place:int = GameManager.get_place(GameManager.you)
 	yourplace_label.text = yourplace_template % [GameManager.int_to_place(place),int(GameManager.you.productivity)]

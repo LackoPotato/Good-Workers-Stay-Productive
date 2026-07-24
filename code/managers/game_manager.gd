@@ -1,16 +1,17 @@
 extends Node
-var day:int = 3
+var day:int = 0
 var time:int = 0
 var default_max_time:int = 200
 var max_time:int = 200
 var work_start_time:int = 32400
 var work_end_time:int = 75600
 var you:Worker = Worker.new("You",0,0,0,0,0,[0,0,0,0,0,0,0])
-var initial_worker_count:int = 100
-var productivity_place_quota:int = 100
+var initial_worker_count:int = 99
+var productivity_place_quota:int = 120
 var workers:Array[Worker]
 var worker_potential_names:PackedStringArray
 var cheated:bool = false
+var productivity_has_been_changed:bool = false
 signal work_ended
 
 var productivity_scale:float = 1
@@ -32,8 +33,9 @@ func _ready() -> void:
 func reset() -> void:
 	day = 0
 	time = 0
-	productivity_place_quota = 80
+	productivity_place_quota = 120
 	cheated = false
+	productivity_has_been_changed = false
 	workers.clear()
 	tasks.clear()
 
@@ -149,7 +151,7 @@ func update_tasks(type:Task.ValidTasks,progress:int) -> void:
 			break
 
 func has_passed() -> bool:
-	return get_place(you) <= productivity_place_quota
+	return (get_place(you) <= productivity_place_quota) or (len(workers) <= productivity_place_quota)
 
 func sort_workers() -> void:
 	workers.sort_custom(func (a:Worker,b:Worker) -> bool: return a.productivity > b.productivity)

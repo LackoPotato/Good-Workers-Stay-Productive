@@ -9,9 +9,11 @@ enum ValidTasks{
 static func make_task(chosen:ValidTasks) -> Task:
 	match chosen:
 		ValidTasks.TEXT:
-			return TextEditor.new(TextEditor.base_count*GameManager.day)
+			return TextEditor.new()
 		ValidTasks.MSG:
-			return Messenger.new(Messenger.base_count*GameManager.day)
+			return Messenger.new()
+		ValidTasks.BUG:
+			return Bug.new()
 		_:
 			push_error("Task %s is not a valid task" % chosen)
 	return null
@@ -26,7 +28,8 @@ static func make_task(chosen:ValidTasks) -> Task:
 
 class TextEditor:
 	extends Task
-	static var base_count:int = 30
+	static var base_count:int = 20
+	static var scale:int = 5
 	func get_type() -> ValidTasks:
 		return ValidTasks.TEXT
 	var base_value:int = 1
@@ -36,9 +39,9 @@ class TextEditor:
 		words_written += progress
 		return words_written >= words_to_write
 	func get_rewarded_productivity() -> int:
-		return int(base_value*words_to_write*(GameManager.productivity_scale*0.75))
-	func _init(to_write:int) -> void:
-		words_to_write = to_write
+		return int(base_value*words_to_write*(GameManager.productivity_scale))
+	func _init() -> void:
+		words_to_write = base_count+scale*GameManager.day
 	func get_task_string() -> String:
 		return "Write %s words in the Document" % words_to_write
 	func get_progress_string() -> String:
@@ -46,7 +49,8 @@ class TextEditor:
 
 class Bug:
 	extends Task
-	static var base_count:int = 5
+	static var base_count:int = 15
+	static var scale:int = 5
 	func get_type() -> ValidTasks:
 		return ValidTasks.BUG
 	var base_value:int = 3
@@ -57,8 +61,8 @@ class Bug:
 		return done >= to_do
 	func get_rewarded_productivity() -> int:
 		return int(base_value*to_do*GameManager.productivity_scale)
-	func _init(to_write:int) -> void:
-		done = to_write
+	func _init() -> void:
+		to_do = base_count+scale*GameManager.day
 	func get_task_string() -> String:
 		return "Fix %s bugs" % to_do
 	func get_progress_string() -> String:
@@ -67,6 +71,7 @@ class Bug:
 class Messenger:
 	extends Task
 	static var base_count:int = 10
+	static var scale:int = 5
 	func get_type() -> ValidTasks:
 		return ValidTasks.MSG
 	var base_value:int = 2
@@ -77,8 +82,8 @@ class Messenger:
 		return sent >= messages_to_send
 	func get_rewarded_productivity() -> int:
 		return int(base_value*messages_to_send*GameManager.productivity_scale)
-	func _init(to_send:int) -> void:
-		messages_to_send = to_send
+	func _init() -> void:
+		messages_to_send = base_count+scale*GameManager.day
 	func get_task_string() -> String:
 		return "Send %s messages" % messages_to_send
 	func get_progress_string() -> String:
