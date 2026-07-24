@@ -16,4 +16,4 @@ func update_text() -> void:
 	if GameManager.has_passed():
 		%time.text = "It is currently the %s day." % GameManager.int_to_place(max(1,GameManager.day+1))
 	else:
-		%time.text = "You got fired on the %s day!" % GameManager.int_to_place(max(1,GameManager.day+1))
+		%time.text = "You got fired on the %s day!" % GameManager.int_to_place(max(1,GameManager.day+1)-1)

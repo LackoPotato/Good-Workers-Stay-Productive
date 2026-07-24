@@ -19,7 +19,14 @@
 [ext_resource type="AudioStream" uid="uid://k307d0ejy0q3" path="res://resources/music/boot.mp3" id="10_eal5s"]
 [ext_resource type="AudioStream" uid="uid://dflat5fe3kyxj" path="res://resources/music/loop.mp3" id="11_eal5s"]
 [ext_resource type="PackedScene" uid="uid://c8p68yybc3i1c" path="res://code/computer/results.tscn" id="12_4axc7"]
+[ext_resource type="AudioStream" uid="uid://dxtb3104ffseh" path="res://resources/music/shutdown.mp3" id="13_k5bpq"]
+[ext_resource type="AudioStream" uid="uid://bk0fn2x5w03pw" path="res://resources/sounds/tick/tick1.mp3" id="14_3oy8s"]
+[ext_resource type="AudioStream" uid="uid://54462yms466l" path="res://resources/sounds/tick/tick2.mp3" id="15_7ih3t"]
 [ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="15_ik8qr"]
+[ext_resource type="AudioStream" uid="uid://c3dn11dm5wv20" path="res://resources/sounds/tick/tick.mp3" id="16_ntc83"]
+[ext_resource type="AudioStream" uid="uid://boh00ibipegia" path="res://resources/sounds/tock/tock1.mp3" id="17_utslw"]
+[ext_resource type="AudioStream" uid="uid://7vmuwo2jxqpf" path="res://resources/sounds/tock/tock2.mp3" id="18_ci24a"]
+[ext_resource type="AudioStream" uid="uid://ble5bly8rumc7" path="res://resources/sounds/tock/tock.mp3" id="19_rc07d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbbxg"]
 atlas = ExtResource("6_l37ko")
@@ -113,6 +120,9 @@ bug_scene = ExtResource("9_dtj0n")
 music_boot = ExtResource("10_eal5s")
 music_intro = ExtResource("10_c3lii")
 music_loop = ExtResource("11_eal5s")
+music_shutdown = ExtResource("13_k5bpq")
+ticks = Array[AudioStream]([ExtResource("14_3oy8s"), ExtResource("15_7ih3t"), ExtResource("16_ntc83")])
+tocks = Array[AudioStream]([ExtResource("17_utslw"), ExtResource("18_ci24a"), ExtResource("19_rc07d")])
 
 [node name="gametimer" type="Timer" parent="." unique_id=602252142]
 
@@ -149,7 +159,7 @@ anisotropic_filtering_level = 0
 canvas_item_default_texture_filter = 0
 gui_embed_subwindows = true
 oversampling = false
-size = Vector2i(640, 440)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="background" type="TextureRect" parent="pc/SubViewportContainer/windowroot" unique_id=862976209]

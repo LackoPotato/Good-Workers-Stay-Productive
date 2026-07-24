@@ -6,7 +6,6 @@
 [ext_resource type="StyleBox" uid="uid://b6l133y5q8gwt" path="res://resources/window/toolbar.tres" id="3_io13l"]
 [ext_resource type="AudioStream" uid="uid://du0wjxvfntx0i" path="res://resources/sounds/typing/type2.mp3" id="3_m870c"]
 [ext_resource type="AudioStream" uid="uid://1tej44pv274a" path="res://resources/sounds/typing/type3.mp3" id="4_phfhb"]
-[ext_resource type="AudioStream" uid="uid://b5d2j2vikekwa" path="res://resources/sounds/typing/type4.mp3" id="5_ytqys"]
 
 [node name="PCWindow" type="Window" unique_id=478694275 node_paths=PackedStringArray("document", "editor", "audio")]
 oversampling_override = 1.0
@@ -17,7 +16,7 @@ theme_override_constants/resize_margin = 8
 script = ExtResource("2_j4mio")
 document = NodePath("PanelContainer/VBoxContainer/document")
 editor = NodePath("PanelContainer/editor")
-clicks = Array[AudioStream]([ExtResource("2_pptv7"), ExtResource("3_m870c"), ExtResource("4_phfhb"), ExtResource("5_ytqys")])
+clicks = Array[AudioStream]([ExtResource("2_pptv7"), ExtResource("3_m870c"), ExtResource("4_phfhb")])
 audio = NodePath("audio")
 metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
 

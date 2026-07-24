@@ -10,8 +10,8 @@ extends PanelContainer
 @export var player_surrounding_amount:int = 3
 
 func update_rankings() -> void:
-	fireplace.visible = not GameManager.productivity_place_quota >= len(GameManager.workers)
-	fireplace.text = fire_template % GameManager.productivity_place_quota
+	fireplace.visible = (GameManager.productivity_place_quota < len(GameManager.workers)) or (GameManager.minimum_score_required != -1)
+	fireplace.text = (fire_template % GameManager.productivity_place_quota) if (GameManager.minimum_score_required == -1) else robot_worker_template % GameManager.minimum_score_required
 	var place:int = GameManager.get_place(GameManager.you)
 	yourplace_label.text = yourplace_template % [GameManager.int_to_place(place),int(GameManager.you.productivity)]
 	var text:String = ""

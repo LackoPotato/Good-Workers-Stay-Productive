@@ -10,7 +10,6 @@
 [ext_resource type="AudioStream" uid="uid://blwulobysum4q" path="res://resources/sounds/typing/type1.mp3" id="6_pq8nv"]
 [ext_resource type="AudioStream" uid="uid://du0wjxvfntx0i" path="res://resources/sounds/typing/type2.mp3" id="7_8e4h2"]
 [ext_resource type="AudioStream" uid="uid://1tej44pv274a" path="res://resources/sounds/typing/type3.mp3" id="8_n1k3k"]
-[ext_resource type="AudioStream" uid="uid://b5d2j2vikekwa" path="res://resources/sounds/typing/type4.mp3" id="9_335pl"]
 [ext_resource type="AudioStream" uid="uid://bcs3tukqh8pk0" path="res://resources/sounds/bell.mp3" id="10_8e4h2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
@@ -40,7 +39,7 @@ left = ExtResource("2_hjnws")
 right = ExtResource("3_brulx")
 up = ExtResource("4_qy6vx")
 down = ExtResource("5_gwn4p")
-clicks = Array[AudioStream]([ExtResource("6_pq8nv"), ExtResource("7_8e4h2"), ExtResource("8_n1k3k"), ExtResource("9_335pl")])
+clicks = Array[AudioStream]([ExtResource("6_pq8nv"), ExtResource("7_8e4h2"), ExtResource("8_n1k3k")])
 recieved_message = ExtResource("10_8e4h2")
 audio = NodePath("audio")
 metadata/_custom_type_script = "uid://c6aov5wgs2qgw"

@@ -1,6 +1,7 @@
 extends Node
 var day:int = 0
 var time:int = 0
+
 var default_max_time:int = 200
 var max_time:int = 200
 var work_start_time:int = 32400
@@ -10,6 +11,7 @@ var initial_worker_count:int = 99
 var productivity_place_quota:int = 120
 var workers:Array[Worker]
 var worker_potential_names:PackedStringArray
+var minimum_score_required:int = -1
 var cheated:bool = false
 var productivity_has_been_changed:bool = false
 signal work_ended
@@ -57,15 +59,15 @@ func initialise_workers() -> void:
 		var l:float = max(0.2,log(i/2))
 		workers.append(Worker.new(
 			worker_potential_names[randi_range(0,len(worker_potential_names)-1)],
-			l+get_random_variance(),
-			-(1.0/2.0)*l+get_random_variance(),
-			+(1.0/2.0)*l+get_random_variance(),
-			-(1.0/4.0)*l+get_random_variance(),
-			+(1.0/4.0)*l+get_random_variance()
+			(l/4)+get_random_variance(),
+			-(l/8.0)+get_random_variance(),
+			+(l/8.0)+get_random_variance(),
+			-(l/8.0)+get_random_variance(),
+			+(l/8.0)+get_random_variance()
 		))
 
 func get_random_variance() -> float:
-	return randf_range(-0.1,0.3)
+	return randf_range(-0.1,0.1)
 
 func tick() -> void:
 	if not has_work_ended():
@@ -79,7 +81,7 @@ func tick() -> void:
 class Worker:
 	var name:String
 	var productivity:float
-	var weekly_productivity:Array[float] = [0.4,0.5,0.5,0.65,0.8]
+	var weekly_productivity:Array[float] = [0.4,0.5,0.5,0.6,6.5]
 	var daily_variance_min:float
 	var daily_variance_max:float
 	var hourly_variance_min:float
@@ -151,7 +153,7 @@ func update_tasks(type:Task.ValidTasks,progress:int) -> void:
 			break
 
 func has_passed() -> bool:
-	return (get_place(you) <= productivity_place_quota) or (len(workers) <= productivity_place_quota)
+	return ((get_place(you) <= productivity_place_quota) or (len(workers) <= productivity_place_quota)) and (minimum_score_required == -1 or minimum_score_required <= you.productivity)
 
 func sort_workers() -> void:
 	workers.sort_custom(func (a:Worker,b:Worker) -> bool: return a.productivity > b.productivity)
@@ -163,15 +165,25 @@ func get_place(worker:Worker) -> int:
 func remove_fired_workers() -> void:
 	for i in len(workers)-productivity_place_quota:
 		workers.pop_back()
-
+	
+	if minimum_score_required != -1:
+		for i in len(workers):
+			var worker:Worker = workers[i]
+			if worker.productivity < minimum_score_required:
+				workers.erase(worker)
 func new_day() -> void:
 	time = 0
 	remove_fired_workers()
 	for worker in workers:
 		worker.productivity = 0
-	productivity_place_quota = max(1,productivity_place_quota-20)
 	tasks_finished = 0
 	day += 1
+	if day == 5:
+		minimum_score_required = 50
+	if day >= 5:
+		minimum_score_required += 10
+	else:
+		productivity_place_quota = max(1,productivity_place_quota-20)
 	unlocked_tasks = task_unlock_line.slice(0,min(day,len(task_unlock_line)))
 
 func int_to_place(i:int) -> String:

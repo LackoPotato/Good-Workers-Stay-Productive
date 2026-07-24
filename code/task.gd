@@ -66,7 +66,7 @@ class Bug:
 	func get_task_string() -> String:
 		return "Fix %s bugs" % to_do
 	func get_progress_string() -> String:
-		return "%s killed" % (to_do-done)
+		return "%s left" % (to_do-done)
 
 class Messenger:
 	extends Task
