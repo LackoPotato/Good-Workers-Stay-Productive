@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://d2coct2q3p8ik"]
+
+[ext_resource type="Texture2D" uid="uid://ctxt26qnnt4jt" path="res://resources/textures/browser/computa.png" id="1_4nc3i"]
+[ext_resource type="Script" uid="uid://cu1omn2g4ddfa" path="res://code/applications/browser/thewired/thewired.gd" id="1_51ufx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_742mm"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="thewired" type="PanelContainer" unique_id=810825864]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_742mm")
+script = ExtResource("1_51ufx")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="." unique_id=1156007403]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer3" unique_id=1374583224]
+layout_mode = 2
+text = "warning: using these buttons will activate cheat mode and cant be turned off until you start another run"
+autowrap_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer3" unique_id=2034859707]
+layout_mode = 2
+text = "cheat mode cheat mode cheat mode cheat mode cheat mode cheat mode cheat mode cheat mode "
+clip_text = true
+
+[node name="Label2" type="Label" parent="VBoxContainer3" unique_id=584189990]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43712005, 0.43712005, 0.43712005, 1)
+text = "lets all love lain lets all love lain i am balling lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain i am faded lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain i have lost it all lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain i am fading lets all love lain lets all love lainlets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain lets all love lain "
+autowrap_mode = 3
+clip_text = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1506699885]
+visible = false
+layout_mode = 2
+texture = ExtResource("1_4nc3i")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=249692376]
+layout_mode = 2
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1287171664]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1421689156]
+layout_mode = 2
+alignment = 1
+
+[node name="100" type="Button" parent="VBoxContainer2" unique_id=1720812068]
+layout_mode = 2
+text = "Add 100 productivity"
+
+[node name="10" type="Button" parent="VBoxContainer2" unique_id=796740908]
+layout_mode = 2
+text = "Add 10 Productivity"
+
+[node name="apps" type="Button" parent="VBoxContainer2" unique_id=1816242482]
+layout_mode = 2
+text = "Add access to all apps (applies on shutdown)"
+
+[connection signal="pressed" from="VBoxContainer2/100" to="." method="_on__pressed"]
+[connection signal="pressed" from="VBoxContainer2/10" to="." method="_on_ten_pressed"]
+[connection signal="pressed" from="VBoxContainer2/apps" to="." method="_on_apps_pressed"]

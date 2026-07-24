@@ -10,4 +10,7 @@ func _on_login_gui_input(event: InputEvent) -> void:
 
 
 func _on_visibility_changed() -> void:
-	%time.text = "It is currently the %s day." % GameManager.int_to_place(max(1,GameManager.day))
+	update_text()
+
+func update_text() -> void:
+	%time.text = "It is currently the %s day." % GameManager.int_to_place(max(1,GameManager.day+1))

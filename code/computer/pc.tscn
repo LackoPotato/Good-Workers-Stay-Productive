@@ -12,9 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://d0nnvt67h10j3" path="res://resources/textures/desktop/apps.png" id="6_l37ko"]
 [ext_resource type="PackedScene" uid="uid://hj5opt22u0at" path="res://code/applications/messenger/messenger.tscn" id="6_ttuhk"]
 [ext_resource type="PackedScene" uid="uid://cc0a55gka446w" path="res://code/computer/turnon.tscn" id="7_6h2xv"]
-[ext_resource type="PackedScene" uid="uid://btk73roodlwn5" path="res://code/applications/credits.tscn" id="7_hlc3l"]
+[ext_resource type="PackedScene" uid="uid://btk73roodlwn5" path="res://code/applications/readme.tscn" id="7_hlc3l"]
 [ext_resource type="AudioStream" uid="uid://dkbs1i5wltnip" path="res://resources/sounds/chime.mp3" id="7_oaw7r"]
+[ext_resource type="PackedScene" uid="uid://p34tax1f0x7q" path="res://code/bug/bug.tscn" id="9_dtj0n"]
 [ext_resource type="PackedScene" uid="uid://c8p68yybc3i1c" path="res://code/computer/results.tscn" id="12_4axc7"]
+[ext_resource type="Script" uid="uid://dix8ymsrpd2uj" path="res://code/scrolleffect.gd" id="15_ik8qr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbbxg"]
 atlas = ExtResource("6_l37ko")
@@ -53,10 +55,35 @@ corner_radius_bottom_left = 20
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xy2n0"]
 bg_color = Color(0.6236486, 0.33638436, 0.61486095, 1)
 
+[sub_resource type="Curve2D" id="Curve2D_ik8qr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -27, -25, 0, 0, 0, 0, 18, 17, -11.269721, -29.301275, 11.269721, 29.301275, 32, 40, 0, 0, 0, 0, 43, 80, 0, 0, 0, 0, 44, 114, -13.523665, -42.073627, 13.523665, 42.073627, 45, 162, -31.55522, -19.909842, 31.55522, 19.909842, 69, 192, -46.205856, 6.3861756, 46.205856, -6.3861756, 99, 193, -6.7618327, 15.77761, 6.7618327, -15.77761, 136, 168, 0, 0, 0, 0, 146, 136, -22.163786, 32.306534, 22.163786, -32.306534, 159, 94, 0, 0, 0, 0, 240, 50, -33.05785, -5.2592034, 33.05785, 5.2592034, 311, 47, 21.036814, -76.258446, -21.036814, 76.258446, 364, 71, -41.32231, 38.69271, 41.32231, -38.69271, 403, 114, 0, 0, 0, 0, 458, 82, -58.97821, 30.803905, 58.97821, -30.803905, 481, 38, 0, 0, 0, 0, 542, 29, -31.179562, -29.301275, 31.179562, 29.301275, 591, 43, -0.37565738, -35.68745, 0.37565738, 35.68745, 609, 72, 0, 0, 0, 0, 594, 110, 0, 0, 0, 0, 558, 171, 11.645379, -93.914345, -11.645379, 93.914345, 558, 211, 0, 0, 0, 0, 583, 255, 30.428247, -44.32757, -30.428247, 44.32757, 582, 331, 45.078884, -30.05259, -45.078884, 30.05259, 527, 409, 0, 0, 0, 0, 425, 430, 36.814423, 66.491356, -36.814423, -66.491356, 265, 392, 4.507889, 67.99399, -4.507889, -67.99399, 277, 217, 65.36439, -8.64012, -65.36439, 8.64012, 138, 80, -1.1269722, -52.216377, 1.1269722, 52.216377, 24, 223, -9.391435, -44.703228, 9.391435, 44.703228, 92, 369, 0, 0, 0, 0, 56, 442, 31.55522, -6.7618327, -31.55522, 6.7618327, 1, 478, 0, 0, 0, 0, -72, 487)
+}
+point_count = 35
+
+[sub_resource type="Curve2D" id="Curve2D_dtj0n"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 175, 537, 38.088566, 117.808815, -38.088566, -117.808815, 145, 242, -99.20743, 156.78316, 99.20743, -156.78316, 57, 85, -54.918396, -30.116539, 54.918396, 30.116539, 324, 14, -54.032616, -53.146835, 54.032616, 53.146835, 488, 29, -93.89274, -136.4102, 93.89274, 136.4102, 650, 175, 85.920715, 47.83215, -85.920715, -47.83215, 572, 352, 61.11886, 57.575737, -61.11886, -57.575737, 268, 236, -43.403248, 77.06291, 43.403248, -77.06291, 234, 108, -80.60603, -99.20743, 80.60603, 99.20743, 459, 108, 0, 0, 0, 0, 344, 528)
+}
+point_count = 11
+
+[sub_resource type="Curve2D" id="Curve2D_0o3vy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 624, -90, 57.575737, -138.18176, -57.575737, 138.18176, 32, 160, 21.258734, -152.35426, -21.258734, 152.35426, 542, 22, -68.2051, -138.18176, 68.2051, 138.18176, 107, 251, -62.00464, -83.263374, 62.00464, 83.263374, 563, 118, -53.146835, -100.09321, 53.146835, 100.09321, 235, 386, 0, 0, 0, 0, 786, 213)
+}
+point_count = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rq5xq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_fbbxg"]
+script = ExtResource("15_ik8qr")
+metadata/_custom_type_script = "uid://dix8ymsrpd2uj"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng01d"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Control" type="Control" unique_id=2083592552 node_paths=PackedStringArray("windowroot", "windowselectorroot", "gametimer", "active_apps_per_day")]
+[node name="Control" type="Control" unique_id=2083592552 node_paths=PackedStringArray("windowroot", "windowselectorroot", "gametimer", "task_apps", "path_root")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -76,8 +103,10 @@ window_scenes = Dictionary[int, PackedScene]({
 4: ExtResource("6_ttuhk"),
 5: ExtResource("7_hlc3l")
 })
-active_apps_per_day = [NodePath("pc/SubViewportContainer/windowroot/text"), NodePath("pc/SubViewportContainer/windowroot/messages")]
+task_apps = [NodePath("pc/SubViewportContainer/windowroot/text"), NodePath("pc/SubViewportContainer/windowroot/messages")]
 alert_sound = ExtResource("7_oaw7r")
+path_root = NodePath("pc/potential_paths")
+bug_scene = ExtResource("9_dtj0n")
 
 [node name="gametimer" type="Timer" parent="." unique_id=602252142]
 
@@ -190,6 +219,10 @@ unique_name_in_owner = true
 visible = false
 open_on_ready = false
 
+[node name="prompt" parent="pc/SubViewportContainer/windowroot/shutdownprompt/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer2/VBoxContainer" parent_id_path=PackedInt32Array(1825997023, 1402391661) index="0" unique_id=1521947774]
+text = "work has finished, would you like to shutdown
+your pc?"
+
 [node name="highlight" type="GridContainer" parent="pc/SubViewportContainer/windowroot" unique_id=937224020]
 anchors_preset = 15
 anchor_right = 1.0
@@ -275,7 +308,47 @@ theme_override_constants/margin_right = 10
 [node name="time" type="Label" parent="pc/taskmanager/HBoxContainer/HBoxContainer/MarginContainer" unique_id=1649499009]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Day: 1 || 12:42"
+
+[node name="potential_paths" type="Node2D" parent="pc" unique_id=255169763]
+
+[node name="1" type="Path2D" parent="pc/potential_paths" unique_id=1741113926]
+position = Vector2(13, 32)
+curve = SubResource("Curve2D_ik8qr")
+
+[node name="2" type="Path2D" parent="pc/potential_paths" unique_id=1236912682]
+position = Vector2(13, 32)
+curve = SubResource("Curve2D_dtj0n")
+
+[node name="3" type="Path2D" parent="pc/potential_paths" unique_id=771476701]
+position = Vector2(13, 32)
+curve = SubResource("Curve2D_0o3vy")
+
+[node name="time_passer" type="PanelContainer" parent="." unique_id=217807234]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rq5xq")
+
+[node name="CenterContainer" type="CenterContainer" parent="time_passer" unique_id=34069107]
+layout_mode = 2
+
+[node name="time_passer_label" type="RichTextLabel" parent="time_passer/CenterContainer" unique_id=1158857482]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Passing time until work ends:
+[scroll max_time=2]%s[/scroll]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+custom_effects = [SubResource("RichTextEffect_fbbxg")]
 
 [node name="transition_panel_top" type="Panel" parent="." unique_id=1000274068]
 unique_name_in_owner = true
@@ -296,6 +369,10 @@ layout_mode = 1
 [node name="audio" type="AudioStreamPlayer" parent="." unique_id=538796138]
 unique_name_in_owner = true
 bus = &"Sound"
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=589703025]
+unique_name_in_owner = true
+bus = &"Music"
 
 [connection signal="timeout" from="gametimer" to="." method="_on_gametimer_timeout"]
 [connection signal="start" from="turnon" to="." method="_on_turnon_start"]

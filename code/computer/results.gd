@@ -36,6 +36,7 @@ func get_progress_label(box:HBoxContainer) -> RichTextLabel:
 func show_results() -> void:
 	%speed_change.visible = GameManager.default_max_time != GameManager.max_time
 	%speed_change.text = "%s IGT seconds per second" % GameManager.get_time_ratio()
+	%cheat_mode.visible = GameManager.cheated
 	clear(tasks_finished)
 	clear(productivity)
 	texture.region.position.x = -image_size
@@ -45,8 +46,7 @@ func show_results() -> void:
 	audio.playing = true
 	var passed:bool = GameManager.has_passed()
 	if passed:
-		var ratio:float = ((pposition)/(len(GameManager.workers)))
-		print(ratio)
+		var ratio:float = ((pposition-1)/(len(GameManager.workers)))
 		rank = max(1,floori((1-ratio) * 4))
 	else:
 		rank = 0

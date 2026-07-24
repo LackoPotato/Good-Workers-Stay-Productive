@@ -43,7 +43,8 @@ text = "?:|"
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer2/VBoxContainer" unique_id=1521947774]
+[node name="prompt" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/HBoxContainer2/VBoxContainer" unique_id=1521947774]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "would you like to shut down your pc

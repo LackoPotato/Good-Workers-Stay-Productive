@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://p34tax1f0x7q"]
+
+[ext_resource type="Script" uid="uid://5q82r76no3i8" path="res://code/bug/bug.gd" id="1_spfiu"]
+[ext_resource type="AudioStream" uid="uid://b3htx01cgt3l5" path="res://resources/sounds/deadbug/crash2.mp3" id="2_spesf"]
+[ext_resource type="Texture2D" uid="uid://cjwkqd1k3fnv7" path="res://resources/textures/bug.png" id="2_wirms"]
+[ext_resource type="AudioStream" uid="uid://bw836cx4nu3wu" path="res://resources/sounds/deadbug/crash4.mp3" id="3_e0eo5"]
+[ext_resource type="AudioStream" uid="uid://bi1arddwat7us" path="res://resources/sounds/deadbug/crunch.mp3" id="3_spfiu"]
+[ext_resource type="AudioStream" uid="uid://kutfsp8yngum" path="res://resources/sounds/deadbug/crash1.mp3" id="4_vddto"]
+[ext_resource type="AudioStream" uid="uid://ct7ikbff6q6mo" path="res://resources/sounds/deadbug/crash3.mp3" id="5_fy1ii"]
+[ext_resource type="AudioStream" uid="uid://cyv8bg57nae3q" path="res://resources/sounds/deadbug/crunch2.mp3" id="7_wlb2n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt5s7"]
+atlas = ExtResource("2_wirms")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmpqp"]
+atlas = ExtResource("2_wirms")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spfiu"]
+atlas = ExtResource("2_wirms")
+region = Rect2(64, 0, 32, 32)
+
+[node name="bug" type="PathFollow2D" unique_id=1472762032 node_paths=PackedStringArray("bug", "audio")]
+position = Vector2(50, 61)
+rotation = 0.69620454
+script = ExtResource("1_spfiu")
+bug = NodePath("bug")
+crush_noises = Array[AudioStream]([ExtResource("2_spesf"), ExtResource("3_e0eo5"), ExtResource("4_vddto"), ExtResource("5_fy1ii"), ExtResource("3_spfiu"), ExtResource("7_wlb2n")])
+audio = NodePath("audio")
+squished = SubResource("AtlasTexture_vt5s7")
+
+[node name="bug" type="TextureButton" parent="." unique_id=1117670169]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+offset_transform_enabled = true
+offset_transform_visual_only = false
+texture_normal = SubResource("AtlasTexture_gmpqp")
+texture_pressed = SubResource("AtlasTexture_spfiu")
+texture_hover = SubResource("AtlasTexture_spfiu")
+texture_focused = SubResource("AtlasTexture_spfiu")
+stretch_mode = 0
+
+[node name="audio" type="AudioStreamPlayer" parent="." unique_id=1786162787]
+stream = ExtResource("3_spfiu")
+bus = &"Sound"
+
+[connection signal="pressed" from="bug" to="." method="_on_bug_pressed"]

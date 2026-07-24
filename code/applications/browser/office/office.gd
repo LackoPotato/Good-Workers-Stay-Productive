@@ -10,8 +10,7 @@ extends PanelContainer
 
 func update_rankings() -> void:
 	fireplace.text = fire_template % GameManager.productivity_place_quota
-	GameManager.workers.sort_custom(sort)
-	var place:int = GameManager.workers.find(GameManager.you)+1
+	var place:int = GameManager.get_place(GameManager.you)
 	yourplace_label.text = yourplace_template % [GameManager.int_to_place(place),int(GameManager.you.productivity)]
 	var text:String = ""
 	for i in range(min(len(GameManager.workers),10)):

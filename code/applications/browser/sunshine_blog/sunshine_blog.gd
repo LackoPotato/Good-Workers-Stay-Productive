@@ -7,7 +7,7 @@ extends PanelContainer
 	"We have implemented a new leaderboard system!\nTo score more points, you just have to complete tasks on the new tasks app installed in your computers.\nAll employees are recommended to keep their productivity up for the chance to get big bonuses!\nThank you and remember, we love you all",
 	"Management have noticed a dip in our companies projected earning.\nAs a family, we all have to work together to be the best that we can be.\nSo to motivate our workers, all workers are now required to place high enough in the leaderboards starting today.\nFailure to comply will result in a release from our company.\nThank you and remember, we love you all.",
 	"As we are running low on sales staff, all workers are now required to complete personal sales campaigns to our prospective customers! Just use our new messaging app.\nThank you and remember, we love you all.",
-	"Sadly, with the loss of our beloved accountants, all workers now have to complete personal balance sheets (and sign a financial accountability slip).\nYou will see new calculator and finance apps!\nThank you and remember, we like you all",
+	"Sadly, with the loss of our beloved programmers, all of our software is riddled with bugs.\nAll workers are now required to \"fix\" any bugs they find.\nThank you and remember, we value the time you put into our family!",
 	"In order to increase our company value, all workers are recommended to join a new worker personal targetting marketing campaign programs, preinstalled and preenabled on all our computers.\nThank you.",
 	"We have implemented a new Artifical worker system. For the sake of efficiency, all workers are expected to exceed the productivity of these robots."
 ]

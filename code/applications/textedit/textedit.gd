@@ -3,7 +3,8 @@ var focused:bool = true
 @export var document:RichTextLabel
 @export var editor:LineEdit
 @export var word_path:String = "res://resources/textedit_documents/"
-
+@export var clicks:Array[AudioStream]
+@export var audio:AudioStreamPlayer
 var words:Array[RegExMatch]
 var word_index:int = 0
 var current_word:String
@@ -40,7 +41,7 @@ func get_edited_word() -> String:
 		var word:String = words[index].get_string()
 		lookahead += "%s " %word
 	edited += unfinished_template % lookahead
-	return edited
+	return edited.to_lower()
 
 func correct_word() -> bool:
 	return editor.text.rstrip(" ") == current_word
@@ -50,24 +51,31 @@ func _physics_process(_delta: float) -> void:
 		score()
 	document.text = finished+get_edited_word()
 
+func work_ended() -> void:
+	set_physics_process(false)
+	document.text = finished
+
 func score() -> void:
 	finished += editor.text
 	editor.text = ""
 	word_index += 1
 	word_index = word_index % len(words)
-	current_word = words[word_index].get_string()
+	current_word = words[word_index].get_string().to_lower()
 	GameManager.update_tasks(Task.ValidTasks.TEXT,1)
 
 func _on_editor_text_changed(new_text: String) -> void:
+	audio.stream = clicks[randi_range(0,len(clicks)-1)]
+	audio.play()
 	if new_text.contains(" "):
 		editor.delete_char_at_caret()
-	if new_text.contains(" "): # If the caret delete didnt work (e.g. Someone copied and pasted text (Can't ovveride on _copy a LineEdit))
+	if editor.text.contains(" "): # If the caret delete didnt work (e.g. Someone copied and pasted text (Can't ovveride on _copy a LineEdit))
 		editor.text = editor.text.replace(" ","")
 	
 func _ready() -> void:
+	GameManager.work_ended.connect(work_ended)
 	setup_words()
 	word_index = 0
-	current_word = words[word_index].get_string()
+	current_word = words[word_index].get_string().to_lower()
 
 func setup_words() -> void:
 	var paths:PackedStringArray = DirAccess.get_files_at(word_path)

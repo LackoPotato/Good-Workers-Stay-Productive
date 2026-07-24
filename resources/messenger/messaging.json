@@ -19,9 +19,34 @@
 		"Are you interested in a 80% off discount code in our product?",
 		"Just use code SALESTASTIC!",
 		"Just use code SALESTASTIC!",
-		"Are you copying me?",
-		"Are you copying me?",
-		"Thank you for your time!",
-		"Thank you for your time!"
+		"...",
+		":)",
 	],
+	[
+		"Hi I'm [%s] - property agent do you wish to sell or rent your [FACTORY @ SEKSYEN 23] or other property? Best regards and good days!",
+		"..what?",
+		"You FACTORY.",
+		"I don't have a factory.",
+	],
+	[
+		"Hello.",
+		"Help me. I don't know where I am.",
+		"Would you like to be guided to our nearest sales professional? Guaranteed one in every square mile!",
+		"He is coming. They are coming.",
+		"Arrive today and receive a special offer, just for you!",
+	],
+	[
+		"I like you. You are a wonderful person. You’re full of pizzazz.",
+		"What? Sorry I think you have the wrong number",
+		"Im going places; I'd be happy to bring you with me",
+		"To where?",
+		"I am an important person. Would you like to come home with me?"
+	],
+	[
+		"[Person Name], Our most valued customer, everybody is buzzing about you!",
+		"who are you",
+		"Do you want to see your name in lights?",
+		"?",
+		"Do you want to see your name in lights?",
+	]
 ]

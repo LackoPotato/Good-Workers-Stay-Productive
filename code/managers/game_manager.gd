@@ -1,5 +1,5 @@
 extends Node
-var day:int = 0
+var day:int = 3
 var time:int = 0
 var default_max_time:int = 200
 var max_time:int = 200
@@ -7,13 +7,11 @@ var work_start_time:int = 32400
 var work_end_time:int = 75600
 var you:Worker = Worker.new("You",0,0,0,0,0,[0,0,0,0,0,0,0])
 var initial_worker_count:int = 100
-var productivity_place_quota:int = 80
-var written_words:int = 0
+var productivity_place_quota:int = 100
 var workers:Array[Worker]
 var worker_potential_names:PackedStringArray
-
-func reset() -> void:
-	get_tree().reload_current_scene()
+var cheated:bool = false
+signal work_ended
 
 var productivity_scale:float = 1
 var background:Texture = preload("res://resources/textures/backgrounds/orangesky.JPG"):
@@ -30,6 +28,14 @@ func add_productivity(amount:float) -> void:
 func _ready() -> void:
 	read_names()
 	task_finished.connect(on_task_finished)
+
+func reset() -> void:
+	day = 0
+	time = 0
+	productivity_place_quota = 80
+	cheated = false
+	workers.clear()
+	tasks.clear()
 
 func start() -> void:
 	initialise_workers()
@@ -60,9 +66,12 @@ func get_random_variance() -> float:
 	return randf_range(-0.1,0.3)
 
 func tick() -> void:
-	time += 1
-	for worker in workers:
-			worker.productivity += worker.calculate_work()
+	if not has_work_ended():
+		time += 1
+		for worker in workers:
+				worker.productivity += worker.calculate_work()
+	else:
+		work_ended.emit()
 
 
 class Worker:
@@ -110,6 +119,7 @@ var tasks:Array[Task]:
 var max_tasks:int = 3
 @warning_ignore("int_as_enum_without_cast")
 var unlocked_tasks:Array[Task.ValidTasks] = [0,1]
+var task_unlock_line:Array[Task.ValidTasks] = [0,1,2]
 var posted_blogs:Array[String]
 var tasks_finished:int = 0
 signal tasks_updated()
@@ -139,22 +149,28 @@ func update_tasks(type:Task.ValidTasks,progress:int) -> void:
 			break
 
 func has_passed() -> bool:
-	print(workers.find(you),productivity_place_quota)
-	return workers.find(you) <= productivity_place_quota
+	return get_place(you) <= productivity_place_quota
 
-func sort(worker_a:GameManager.Worker,worker_b:GameManager.Worker) -> bool:
-	return worker_a.productivity > worker_b.productivity
+func sort_workers() -> void:
+	workers.sort_custom(func (a:Worker,b:Worker) -> bool: return a.productivity > b.productivity)
 
 func get_place(worker:Worker) -> int:
-	workers.sort_custom(sort)
+	sort_workers()
 	return workers.find(worker)+1
+
+func remove_fired_workers() -> void:
+	for i in len(workers)-productivity_place_quota:
+		workers.pop_back()
 
 func new_day() -> void:
 	time = 0
+	remove_fired_workers()
 	for worker in workers:
 		worker.productivity = 0
+	productivity_place_quota = max(1,productivity_place_quota-20)
 	tasks_finished = 0
 	day += 1
+	unlocked_tasks = task_unlock_line.slice(0,min(day,len(task_unlock_line)))
 
 func int_to_place(i:int) -> String:
 	if i >= 10 and str(i)[-2] == "1":

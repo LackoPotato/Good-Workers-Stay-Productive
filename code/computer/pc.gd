@@ -4,11 +4,52 @@ extends Control
 @export var gametimer:Timer
 var active_windows:Dictionary[int,PCWindow]
 @export var window_scenes:Dictionary[int,PackedScene]
-@export var active_apps_per_day:Array[Button]
+@export var task_apps:Array[Button]
 @export var alert_sound:AudioStream
+@export var normal_shutdown_prompt:String = "would you like to shut down your pc\nand stop being productive? (ends your day)"
+@export var work_ended_shutdown_prompt:String = "work has finished, would you like to shutdown\nyour pc?"
+@export var path_root:Node2D
+
+@export var bug_scene:PackedScene
+@export var ticks_since_last_bug:int = 1
+@export var bug_chance_per_tick:float = 0.025
+@export var bug_multiple_chance:float = 0.3
+@export var max_bugs:int = 25
+@export var pity_bug_spawn_tick_frequency:int = 45
+var bug_chance:float = 0
+
 func _ready() -> void:
 	GameManager.update_background.connect(change_background)
 	change_background(GameManager.background)
+	GameManager.work_ended.connect(work_finished)
+
+func _on_gametimer_timeout() -> void:
+	GameManager.tick()
+	if (Task.ValidTasks.BUG in GameManager.unlocked_tasks):
+		if (ticks_since_last_bug == pity_bug_spawn_tick_frequency) or (randf() <= bug_chance) or (ticks_since_last_bug == 0 and randf() <= bug_multiple_chance):
+			spawn_bug()
+			bug_chance = 0
+			ticks_since_last_bug = 0
+		bug_chance += bug_chance_per_tick
+	set_time_label()
+
+func get_bug_count() -> int:
+	var count:int = 0
+	for child in path_root.get_children():
+		count+=child.get_child_count()
+	return count
+
+func spawn_bug() -> void:
+	if get_bug_count() <= max_bugs:
+		var root:Path2D = path_root.get_children()[randi_range(0,path_root.get_child_count()-1)] as Path2D
+		var bug := bug_scene.instantiate() as PathFollow2D
+		root.add_child(bug)
+
+func work_finished() -> void:
+	if not %shutdownprompt.is_open:
+		%shutdownprompt.get_node("%prompt").text = work_ended_shutdown_prompt
+	show_shutdown_prompt()
+	gametimer.stop()
 
 func restart() -> void:
 	for id in active_windows:
@@ -17,20 +58,24 @@ func restart() -> void:
 	for child in windowselectorroot.get_children():
 		child.queue_free()
 
-func start_day() -> void:
+func init_day() -> void:
+	ticks_since_last_bug = 1
 	GameManager.new_day()
 	restart()
-	gametimer.start()
 	GameManager.time = 0
 	GameManager.start()
 	set_time_label()
-	for i in min(0,max(GameManager.day,len(active_apps_per_day))):
-		active_apps_per_day[i].show()
+	for app in task_apps:
+		app.hide()
+	for app in GameManager.unlocked_tasks:
+		if app < len(task_apps):
+			task_apps[app].show()
 	%shutdownprompt.close()
 
 func set_time_label() -> void:
 	%time.text = "Day %s | Up next: %s | %s" % [GameManager.day, "Nothing" if GameManager.has_work_ended() else "Work until %s" % GameManager.int_to_time(GameManager.work_end_time),GameManager.get_string_time()]
 
+#region App Management
 func create_window(id:int,scene:PackedScene) -> PCWindow:
 	if id in active_windows:
 		active_windows[id].open()
@@ -69,30 +114,9 @@ func app_icon_pressed(id: int) -> void:
 		last_pressed_time = Time.get_ticks_msec()
 	elif Time.get_ticks_msec()-last_pressed_time < launch_app_ms_limit:
 		create_window(id,window_scenes[id])
+	else:
+		last_pressed_time = Time.get_ticks_msec()
 	
-
-func change_background(texture:Texture) -> void:
-	%background.texture = texture
-
-func on_power_pressed() -> void:
-	%shutdownprompt.open()
-	%shutdownprompt.size = Vector2i(350,100)
-	%audio.stream = alert_sound
-	%audio.play()
-
-
-var shutdown_tick_seconds:float = 0.5
-var shutdown_tick_count:int = 8
-func shutdown() -> void:
-	print("shutdown")
-	transition(%pc,%shutdown)
-	var tween:Tween = get_tree().create_tween()
-	for i in shutdown_tick_count:
-		tween.tween_callback(%shutdown.tick)
-		tween.tween_interval(shutdown_tick_seconds)
-	tween.tween_callback(%results.show_results)
-	tween.tween_callback(gametimer.stop)
-
 func set_snap(window:PCWindow) -> void:
 	self.apply_snap_window = window
 	for panel in snap_position_panels:
@@ -118,28 +142,64 @@ func _input(event: InputEvent) -> void:
 			for panel in snap_position_panels:
 				panel.self_modulate.a = 0
 
+#endregion
 
-func _on_gametimer_timeout() -> void:
-	GameManager.tick()
-	set_time_label()
+#region Transitions
 
+func change_background(texture:Texture) -> void:
+	%background.texture = texture
+
+func on_power_pressed() -> void:
+	if not %shutdownprompt.is_open:
+		%shutdownprompt.get_node("%prompt").text = normal_shutdown_prompt
+	show_shutdown_prompt()
+
+
+func show_shutdown_prompt() -> void:
+	%shutdownprompt.open()
+	%shutdownprompt.size = Vector2i(350,100)
+	%audio.stream = alert_sound
+	%audio.play()
+
+var shutdown_tick_seconds:float = 0.5
+var shutdown_tick_count:int = 8
+func shutdown() -> void:
+	print("shutdown")
+	var tween:Tween = get_tree().create_tween()
+	if not GameManager.has_work_ended():
+		for i in range(GameManager.max_time-GameManager.time):
+			GameManager.tick()
+		%time_passer_label.text = "Passing time until work ends:\n[scroll max_time=1]%s[/scroll]" % GameManager.int_to_time(GameManager.work_end_time)
+		tween.tween_callback(transition.bind(%pc,%time_passer))
+		tween.tween_interval(4)
+		tween.tween_callback(transition.bind(%time_passer,%shutdown))
+	else:
+		transition(%pc,%shutdown)
+	for i in shutdown_tick_count:
+		tween.tween_callback(%shutdown.tick)
+		tween.tween_interval(shutdown_tick_seconds)
+	tween.tween_callback(%results.show_results)
+	tween.tween_callback(gametimer.stop)
 
 func _on_results_next() -> void:
 	transition(%shutdown,%turnon,1)
 
-
-
 func _on_turnon_start() -> void:
+	%turnon.update_text()
 	transition(%turnon,%pc)
-	restart()
-	start_day()
-	gametimer.start()
+	if GameManager.has_passed():
+		restart()
+		init_day()
+		gametimer.start()
+	else:
+		dirty_full_reset()
 
 func transition(from:Control,to:Control,wait_time:float = 0) -> void:
 	%shutdown.hide()
 	%pc.hide()
 	%results.hide()
 	%turnon.hide()
+	%time_passer.hide()
 	%transition_panel_top.show()
 	%transition_panel_top.modulate.a = 0
 	from.show()
@@ -152,3 +212,8 @@ func transition(from:Control,to:Control,wait_time:float = 0) -> void:
 	tween.tween_callback(to.show)
 	tween.tween_property(%transition_panel_top,"modulate:a",0,0.5)
 	tween.tween_callback(%transition_panel_top.hide)
+#endregion
+
+func dirty_full_reset() -> void:
+	GameManager.reset()
+	get_tree().reload_current_scene()

@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://omal3yas3pkd" path="res://code/applications/browser/skg.tscn" id="8_0550l"]
 [ext_resource type="PackedScene" uid="uid://cvah1uvd3er57" path="res://code/applications/browser/notfound.tscn" id="9_8ersy"]
 [ext_resource type="PackedScene" uid="uid://dc7tivhwyki55" path="res://code/applications/browser/sunshine_blog/sunshine_blog.tscn" id="10_22fdi"]
+[ext_resource type="PackedScene" uid="uid://d2coct2q3p8ik" path="res://code/applications/browser/thewired/thewired.tscn" id="11_dodxp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w684a"]
 bg_color = Color(0.5801771, 0.61984015, 0.61229026, 1)
@@ -133,7 +134,7 @@ theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxLine_fbbxg")
 theme_override_styles/pressed = SubResource("StyleBoxLine_fbbxg")
 theme_override_styles/hover = SubResource("StyleBoxLine_fbbxg")
-text = "announcements"
+text = "blog"
 flat = true
 
 [node name="leader" type="Button" parent="PanelContainer/VBoxContainer/shortcuts2/MarginContainer/HBoxContainer" unique_id=862993999]
@@ -181,6 +182,11 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="thewired" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=810825864 instance=ExtResource("11_dodxp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer2/refresh" to="." method="_on_refresh_pressed"]
 [connection signal="text_submitted" from="PanelContainer/VBoxContainer/searchbar/MarginContainer/HBoxContainer/MarginContainer/LineEdit" to="." method="_on_search_submitted"]

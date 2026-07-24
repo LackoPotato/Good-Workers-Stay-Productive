@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://3pti00nb18pq" path="res://resources/textures/arrows.png" id="3_mpfgp"]
 [ext_resource type="Texture2D" uid="uid://t3jgcsgl8eqr" path="res://resources/messenger/up.tres" id="4_qy6vx"]
 [ext_resource type="Texture2D" uid="uid://cq7pg1f2iaho1" path="res://resources/messenger/down.tres" id="5_gwn4p"]
+[ext_resource type="AudioStream" uid="uid://blwulobysum4q" path="res://resources/sounds/typing/type1.mp3" id="6_pq8nv"]
+[ext_resource type="AudioStream" uid="uid://du0wjxvfntx0i" path="res://resources/sounds/typing/type2.mp3" id="7_8e4h2"]
+[ext_resource type="AudioStream" uid="uid://1tej44pv274a" path="res://resources/sounds/typing/type3.mp3" id="8_n1k3k"]
+[ext_resource type="AudioStream" uid="uid://b5d2j2vikekwa" path="res://resources/sounds/typing/type4.mp3" id="9_335pl"]
+[ext_resource type="AudioStream" uid="uid://bcs3tukqh8pk0" path="res://resources/sounds/bell.mp3" id="10_8e4h2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbbxg"]
 bg_color = Color(0.45448655, 0.6213624, 0.7590235, 1)
@@ -21,7 +26,7 @@ bg_color = Color(0.10283553, 0.16150516, 0.32511386, 1)
 atlas = ExtResource("3_mpfgp")
 region = Rect2(0, 0, 32, 32)
 
-[node name="PCWindow" type="Window" unique_id=994677479 node_paths=PackedStringArray("sent_text", "customer_typing", "arrow_box", "typing_text")]
+[node name="PCWindow" type="Window" unique_id=994677479 node_paths=PackedStringArray("sent_text", "customer_typing", "arrow_box", "typing_text", "audio")]
 oversampling_override = 1.0
 title = "Messenger"
 position = Vector2i(0, 36)
@@ -35,6 +40,9 @@ left = ExtResource("2_hjnws")
 right = ExtResource("3_brulx")
 up = ExtResource("4_qy6vx")
 down = ExtResource("5_gwn4p")
+clicks = Array[AudioStream]([ExtResource("6_pq8nv"), ExtResource("7_8e4h2"), ExtResource("8_n1k3k"), ExtResource("9_335pl")])
+recieved_message = ExtResource("10_8e4h2")
+audio = NodePath("audio")
 metadata/_custom_type_script = "uid://c6aov5wgs2qgw"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=231574148]
@@ -141,3 +149,6 @@ stretch_mode = 4
 layout_mode = 2
 texture = SubResource("AtlasTexture_dqs1r")
 stretch_mode = 4
+
+[node name="audio" type="AudioStreamPlayer" parent="." unique_id=1604853384]
+bus = &"Sound"

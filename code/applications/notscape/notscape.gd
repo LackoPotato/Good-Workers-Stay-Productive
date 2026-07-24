@@ -8,6 +8,8 @@ extends PCWindow
 	"www.stopkillinggames.com":%skg,
 	"http://mmm.sunshine.com/blog":%sunshine_blog,
 	"mmm.sunshine.com/blog":%sunshine_blog,
+	"http://mmm.mebious.co.uk":%thewired,
+	"mmm.mebious.co.uk":%thewired,
 }
 var forbidden_pages:Array[String] = [
 	"http://mmm.youtube.com",

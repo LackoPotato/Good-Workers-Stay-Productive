@@ -11,6 +11,10 @@ extends PCWindow
 @export var right:Texture
 @export var up:Texture
 @export var down:Texture
+@export var clicks:Array[AudioStream]
+@export var recieved_message:AudioStream
+@export var audio:AudioStreamPlayer
+var tween:Tween
 enum ARROW{
 	LEFT,
 	RIGHT,
@@ -30,7 +34,16 @@ func _ready() -> void:
 	messages_list = read_json("res://resources/messenger/messaging.json")
 	sequences = read_json("res://resources/messenger/sequences.json")
 	begin_chat()
-	
+	GameManager.work_ended.connect(work_ended)
+
+func work_ended() -> void:
+	set_physics_process(false)
+	for child in arrow_box.get_children():
+		child.queue_free()
+	if tween and tween.is_running():
+		tween.kill()
+	typing_text.hide()
+	sent_text.append_text(chat_closed_text)
 
 var current_chat:Array
 var current_sequence:Array
@@ -51,6 +64,8 @@ func new_sequence() -> void:
 
 func write_message(direction:ARROW) -> void:
 	if current_sequence[0] == direction:
+		audio.stream = clicks[randi_range(0,len(clicks)-1)]
+		audio.play()
 		arrow_box.get_children()[0].queue_free()
 		current_sequence.pop_front()
 		typing_text.visible_ratio = (1-((len(current_sequence))/float(sequence_length)))
@@ -65,12 +80,14 @@ func finish_message() -> void:
 	sent_text.append_text(messenger_template % current_chat[0])
 	current_chat.pop_front()
 	customer_typing.show()
-	var tween:Tween = get_tree().create_tween()
+	tween = get_tree().create_tween()
+	audio.stream = recieved_message
 	for i in range(randi_range(2,4)):
 		tween.tween_callback(customer_typing.set.bind("text",customer_typing_template%(".".repeat(i+1))))
 		tween.tween_interval(0.5)
 	tween.tween_callback(customer_typing.hide)
 	if current_chat:
+		tween.tween_callback(audio.play)
 		tween.tween_callback(sent_text.append_text.bind(receiver_template % current_chat[0]))
 	current_chat.pop_front()
 	if current_chat:

@@ -60,7 +60,11 @@ theme_override_font_sizes/bold_italics_font_size = 12
 theme_override_font_sizes/italics_font_size = 12
 theme_override_font_sizes/mono_font_size = 12
 bbcode_enabled = true
-text = "CREDITS------------
+text = "Welcome to the Sunshine Corporation!
+
+To begin with your job, why don't you read our blog, found in the browser!
+
+CREDITS------------
 Good Workers Stay Productive
 
 Made using the Godot Engine (4.7.1) for the Stop Killing Game's Jam 2026!
